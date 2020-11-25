@@ -1,32 +1,41 @@
 function onSelectReportType(ele){
     var form = $(ele).parent().parent();
-    var label = $(form).find(".additional_msg");
-    var select = $(form).find(".additional_msg_select");
+    var select = $(form).find(".mag_select");
 
     switch (ele.value) {
-        case "donation":
-        case "request":
-            label.text("Resource Type:");
+        case "is_tornado":
+            select.find('option').remove();
+            select.append($("<option></option>")
+                .attr("value", "")
+                .text("Magnitude"));
+            selectValues = ['0', '1', '2', '3', '4',
+                '5'];
+            $.each(selectValues, function (index, value) {
+                select.append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+            });
+            break;
+        case "is_hail":
             select.find('option').remove();
             select.append($("<option></option>")
                 .attr("value","")
-                .text("Choose the resource type"));
-            selectValues = ['water', 'food', 'money', 'medicine', 'cloth',
-                'rescue/volunteer'];
+                .text("Magnitude"));
+            selectValues = ['0-1', '1-2', '2-3', '3-4', '4-5',
+                '5-6'];
             $.each(selectValues, function(index,value) {
                 select.append($("<option></option>")
                     .attr("value",value)
                     .text(value));
             });
             break;
-        case "damage":
-            label.text("Damage Type:");
+        case "is_wind":
             select.find('option').remove();
             select.append($("<option></option>")
                 .attr("value","")
-                .text("Choose the damage type"));
-            selectValues = ['pollution', 'building damage', 'road damage', 'casualty',
-                'other'];
+                .text("Magnitude"));
+            selectValues = ['0-25 mph', '25-50 mph', '50-75 mph', '75-100 mph',
+                '> 100 mph'];
             $.each(selectValues, function(index,value) {
                 select.append($("<option></option>")
                     .attr("value",value)
@@ -34,7 +43,7 @@ function onSelectReportType(ele){
             });
             break;
         default:
-            $(form).find(".additional_msg_div").css("visibility", "hidden");
+            $(form).find(".mag").css("visibility", "visible");
             return;
     }
     $(form).find(".additional_msg_div").css("visibility", "visible");
@@ -100,6 +109,22 @@ function queryReport(event) {
             alert("Status: " + status + "\nError: " + error);
         }
     });
+}
+
+function dateSlider(){
+    $( function() {
+        $( "#slider-range" ).slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 75, 300 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            }
+        });
+        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+            " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    } );
 }
 
 $("#create_report_form").on("submit",createReport);

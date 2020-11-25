@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/disastermngt</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="wisevere@wisevere.cmrbjhwgggxl.us-east-2.rds.amazonaws.com" uuid="25c82c56-be2b-454b-87d4-769c573df8c1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://wisevere.cmrbjhwgggxl.us-east-2.rds.amazonaws.com:5432/wisevere</jdbc-url>
+    </data-source>
   </component>
 </project>
