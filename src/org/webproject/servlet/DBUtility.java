@@ -8,9 +8,9 @@ import java.sql.Statement;
 
 public class DBUtility {
     private static final String Driver = "org.postgresql.Driver";
-    private static final String ConnUrl = "jdbc:postgresql://localhost:5432/disastermngt";
+    private static final String ConnUrl = "jdbc:postgresql://wisevere.cmrbjhwgggxl.us-east-2.rds.amazonaws.com:5432/wisevere";
     private static final String Username = "postgres";
-    private static final String Password = "admin";
+    private static final String Password = "admin576";
 
     // This is a constructor
     public DBUtility() {
@@ -73,9 +73,9 @@ public class DBUtility {
         // util.modifyDB("insert into report (first_name, last_name) values ('test_user_1_fN', 'test_user_1_lN')");
 
         // 2. query the database
-        ResultSet res = util.queryDB("select * from report");
+        ResultSet res = util.queryDB("select * from \"Tornado\"");
         while (res.next()) {
-            System.out.println(res.getString("report_type"));
+            System.out.println(res.getString("injuries"));
         }
 
     }
