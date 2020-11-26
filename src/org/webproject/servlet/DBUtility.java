@@ -75,7 +75,7 @@ public class DBUtility {
         // 2. query the database
         ResultSet res = util.queryDB("select * from \"Tornado\"");
         while (res.next()) {
-            System.out.println(res.getString("injuries"));
+            System.out.println(res.getString("magnitude"));
         }
 
     }

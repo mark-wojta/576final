@@ -79,109 +79,39 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 
         System.out.println("HttpServlet: starting createReport()");
 
-        // 1. create emergency contact
-        int contact_id = 0;
-        String contact_fN = request.getParameter("contact_fN");
-        String contact_lN = request.getParameter("contact_lN");
-        String contact_tel = request.getParameter("contact_tel");
-        String contact_email = request.getParameter("contact_email");
-        if (contact_fN != null) {contact_fN = "'" + contact_fN + "'";}
-        if (contact_lN != null) {contact_lN = "'" + contact_lN + "'";}
-        if (contact_tel != null) {contact_tel = "'" + contact_tel + "'";}
-        if (contact_email != null) {contact_email = "'" + contact_email + "'";}
-        if (contact_fN != null && contact_lN != null) {
-            // create the contact
-            sql = "insert into person (first_name, last_name, telephone, email) " +
-                    "values (" + contact_fN + "," + contact_lN + "," + contact_tel + ","
-                    + contact_email + ")";
-            dbutil.modifyDB(sql);
+        String is_tornado = request.getParameter("is_tornado");
+        String is_hail = request.getParameter("is_hail");
+        String is_wind = request.getParameter("is_wind");
 
-            // record the contact id
-            ResultSet res_1 = dbutil.queryDB("select last_value from person_id_seq");
-            res_1.next();
-            contact_id = res_1.getInt(1);
+        String magnitude = request.getParameter("magnitude");
+        String date = request.getParameter("date");
+        String year = date.split("-")[0];
+        String month = date.split("-")[1];
+        String day = date.split("-")[2];
+        String time = request.getParameter("time");
+        String injuries = request.getParameter("injur");
+        String fatalities = request.getParameter("fatal");
+        String prop_loss = request.getParameter("prop_loss");
+        String crop_loss = request.getParameter("crop_loss");
+        String county = request.getParameter("county");
 
-            System.out.println("Success! Contact created.");
-        }
-
-        // 2. create user
-        int user_id = 0;
-        String fN = request.getParameter("fN");
-        String lN = request.getParameter("lN");
-        String is_male = request.getParameter("is_male");
-        String age = request.getParameter("age");
-        String blood_type = request.getParameter("blood_type");
-        String tel = request.getParameter("tel");
-        String email = request.getParameter("email");
-        if (fN != null) {fN = "'" + fN + "'";}
-        if (lN != null) {lN = "'" + lN + "'";}
-        if (is_male != null) {is_male = "'" + is_male + "'";}
-        if (age != null) {age = "'" + age + "'";}
-        if (blood_type != null) {blood_type = "'" + blood_type + "'";}
-        if (tel != null) {tel = "'" + tel + "'";}
-        if (email != null) {email = "'" + email + "'";}
-
-        sql = "insert into person (first_name, last_name, is_male, age, " +
-                "blood_type, telephone, email, emergency_contact_id) values (" + fN +
-                "," + lN + "," + is_male + "," + age + "," + blood_type + "," + tel +
-                "," + email;
-        if (contact_id > 0) { // check whether has a contact
-            sql += "," + contact_id + ")";
-        } else {
-            sql += ",null)";
-        }
-        dbutil.modifyDB(sql);
-
-        // record user_id
-        ResultSet res_2 = dbutil.queryDB("select last_value from person_id_seq");
-        res_2.next();
-        user_id = res_2.getInt(1);
-
-        System.out.println("Success! User created.");
-
-        // 3. create report
-        int report_id = 0;
-        String report_type = request.getParameter("report_type");
-        String disaster_type = request.getParameter("disaster_type");
-        String lon = request.getParameter("longitude");
-        String lat = request.getParameter("latitude");
-        String message = request.getParameter("message");
-        String add_msg = request.getParameter("additional_message");
-        if (report_type != null) {report_type = "'" + report_type + "'";}
-        if (disaster_type != null) {disaster_type = "'" + disaster_type + "'";}
-        if (message != null) {message = "'" + message + "'";}
-        if (add_msg != null) {add_msg = "'" + add_msg + "'";}
-
-        sql = "insert into report (reportor_id, report_type, disaster_type, geom," +
-                " message) values (" + user_id + "," + report_type + "," + disaster_type
-                + ", ST_GeomFromText('POINT(" + lon + " " + lat + ")', 4326)" + "," +
-                message + ")";
-        dbutil.modifyDB(sql);
-
-        // record report_id
-        ResultSet res_3 = dbutil.queryDB("select last_value from report_id_seq");
-        res_3.next();
-        report_id = res_3.getInt(1);
-
-        System.out.println("Success! Report created.");
-
-        // 4. create specific report
-        if (report_type.equals("'donation'")) {
-            sql = "insert into donation_report (report_id, resource_type) values ('"
-                    + report_id + "'," + add_msg + ")";
-            System.out.println("Success! Donation report created.");
-        } else if (report_type.equals("'request'")) {
-            sql = "insert into request_report (report_id, resource_type) values ('"
-                    + report_id + "'," + add_msg + ")";
-            System.out.println("Success! Request report created.");
-        } else if (report_type.equals("'damage'")) {
-            sql = "insert into damage_report (report_id, damage_type) values ('"
-                    + report_id + "'," + add_msg + ")";
-            System.out.println("Success! Damage report created.");
-        } else {
-            return;
-        }
-        dbutil.modifyDB(sql);
+//        // 4. create specific report
+//        if (is_tornado != null) {
+//            sql = "insert into \"Tornado\" (year, month, day, date, time, magnitude, injuries, fatalities, prop_loss, crop_loss, lat, lon, county) values ('"
+//                    + year + "'," + month + "'," + day + "'," + date + "'," + time + "'," + magnitude + injuries + "'," + fatalities + "'," + prop_loss + "'," + crop_loss + "'," + lat + "'," + lon + "'," + county + ")";
+//            System.out.println("Success! Tornado event created.");
+//        } else if (is_hail != null) {
+//            sql = "insert into \"Hail\" (report_id, resource_type) values ('"
+//                    + report_id + "'," + add_msg + ")";
+//            System.out.println("Success! Hail event created.");
+//        } else if (is_wind != null) {
+//            sql = "insert into \"Wind\" (report_id, damage_type) values ('"
+//                    + report_id + "'," + add_msg + ")";
+//            System.out.println("Success! Wind event created.");
+//        } else {
+//            return;
+//        }
+//        dbutil.modifyDB(sql);
 
         // response that the report submission is successful
         JSONObject data = new JSONObject();
@@ -197,79 +127,70 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
     private void queryReport(HttpServletRequest request, HttpServletResponse
             response) throws JSONException, SQLException, IOException {
         JSONArray list = new JSONArray();
+        System.out.println("HttpServlet: starting queryReport()");
 
-        String disaster_type = request.getParameter("disaster_type");
-        String report_type = request.getParameter("report_type");
-        // resource_or_damage will be null if report_type is null
-        String resource_or_damage = request.getParameter("resource_or_damage");
+        String event_type = request.getParameter("event_type");
+        String magnitude = request.getParameter("magnitude");
+        String date = request.getParameter("date");
+        String year = date.split("-")[0];
+        String month = date.split("-")[1];
+        String day = date.split("-")[2];
+        String time = request.getParameter("time");
+        String injuries = request.getParameter("injur");
+        String fatalities = request.getParameter("fatal");
+        String prop_loss = request.getParameter("prop_loss");
+        String crop_loss = request.getParameter("crop_loss");
+        String county = request.getParameter("county");
 
         // request report
-        if (report_type == null || report_type.equalsIgnoreCase("request")) {
-            String sql = "select report.id, report_type, resource_type, " +
-                    "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-                    "longitude, ST_Y(geom) as latitude, message from report, person, " +
-                    "request_report where reportor_id = person.id and report.id = " +
-                    "report_id";
-            queryReportHelper(sql,list,"request",disaster_type,resource_or_damage);
+        if (event_type.equalsIgnoreCase("is_tornado")) {
+            System.out.println("is_tornado");
+            String sql = "select magnitude from \"Tornado\"";
+            queryReportHelper(sql,list,"tornado", magnitude, county);
         }
 
         // donation report
-        if (report_type == null || report_type.equalsIgnoreCase("donation")) {
-            String sql = "select report.id, report_type, resource_type, " +
-                    "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-                    "longitude, ST_Y(geom) as latitude, message from report, person, " +
-                    "donation_report where reportor_id = person.id and report.id = " +
-                    "report_id";
-            queryReportHelper(sql,list,"donation",disaster_type,resource_or_damage);
+        if (event_type.equalsIgnoreCase("is_hail")) {
+            String sql = "select magnitude, ST_X(geom) as " +
+                    "longitude, ST_Y(geom) as latitude from \"Hail\"";
+            queryReportHelper(sql,list,"hail",magnitude, county);
         }
 
         // damage report
-        if (report_type == null || report_type.equalsIgnoreCase("damage")) {
-            String sql = "select report.id, report_type, damage_type, " +
-                    "disaster_type, first_name, last_name, time_stamp, ST_X(geom) as " +
-                    "longitude, ST_Y(geom) as latitude, message from report, person, " +
-                    "damage_report where reportor_id = person.id and report.id = " +
-                    "report_id";
-            queryReportHelper(sql,list,"damage",disaster_type,resource_or_damage);
+        if (event_type.equalsIgnoreCase("is_wind")) {
+            String sql = "select magnitude, ST_X(geom) as " +
+                    "longitude, ST_Y(geom) as latitude from \"Wind\"";
+            queryReportHelper(sql,list,"wind",magnitude, county);
         }
 
         response.getWriter().write(list.toString());
     }
 
-    private void queryReportHelper(String sql, JSONArray list, String report_type,
-                                   String disaster_type, String resource_or_damage) throws SQLException {
+    private void queryReportHelper(String sql, JSONArray list, String event_type,
+                                   String mag, String county) throws SQLException {
         DBUtility dbutil = new DBUtility();
-        if (disaster_type != null) {
-            sql += " and disaster_type = '" + disaster_type + "'";
+        System.out.println("HttpServlet: starting queryReportHelper()");
+        if (mag != null) {
+            sql += " where magnitude = '" + mag + "'";
         }
-        if (resource_or_damage != null) {
-            if (report_type.equalsIgnoreCase("damage")) {
-                sql += " and damage_type = '" + resource_or_damage + "'";
-            } else {
-                sql += " and resource_type = '" + resource_or_damage + "'";
-            }
-        }
+//        if (county != null) {
+//                sql += " and county = '" + county + "'";
+//        }
         ResultSet res = dbutil.queryDB(sql);
         while (res.next()) {
             // add to response
             HashMap<String, String> m = new HashMap<String,String>();
-            m.put("report_id", res.getString("id"));
-            m.put("report_type", res.getString("report_type"));
-            if (report_type.equalsIgnoreCase("donation") ||
-                    report_type.equalsIgnoreCase("request")) {
-                m.put("resource_type", res.getString("resource_type"));
-            }
-            else if (report_type.equalsIgnoreCase("damage")) {
-                m.put("damage_type", res.getString("damage_type"));
-            }
-            m.put("disaster", res.getString("disaster_type"));
-            m.put("first_name", res.getString("first_name"));
-            m.put("last_name", res.getString("last_name"));
-            m.put("time_stamp", res.getString("time_stamp"));
-            m.put("longitude", res.getString("longitude"));
-            m.put("latitude", res.getString("latitude"));
-            m.put("message", res.getString("message"));
+//            m.put("county", res.getString("county"));
+//            if (report_type.equalsIgnoreCase("donation") ||
+//                    report_type.equalsIgnoreCase("request")) {
+//                m.put("resource_type", res.getString("resource_type"));
+//            }
+//            else if (report_type.equalsIgnoreCase("damage")) {
+//                m.put("damage_type", res.getString("damage_type"));
+//            }
+            m.put("magnitude", res.getString("magnitude"));
             list.put(m);
+            System.out.println(res.getString("magnitude"));
         }
     }
 

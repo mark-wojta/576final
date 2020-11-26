@@ -23,3 +23,15 @@ form {
     position: absolute;
     right:0;
 }
+
+.slider-range{
+    background: #729fcf;
+}
+
+.ui-slider-range {
+    background: #729fcf;
+}
+
+#blue .ui-slider-handle {
+    border-color: #729fcf;
+}
