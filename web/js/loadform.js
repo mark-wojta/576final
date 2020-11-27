@@ -1,6 +1,11 @@
 function onSelectReportType(ele){
     var form = $(ele).parent().parent();
     var select = $(form).find(".mag_select");
+    var length_select = $(form).find(".length_select");
+    var len_label = $(form).find(".length");
+    var fatal_select = $(form).find(".fatal_select");
+    var fatal_label = $(form).find(".fatalities");
+    var inj_select = $(form).find(".inj_select");
 
     switch (ele.value) {
         case "is_tornado":
@@ -15,19 +20,67 @@ function onSelectReportType(ele){
                     .attr("value", value)
                     .text(value));
             });
+            len_label.text("Length:");
+            length_select.find('option').remove();
+            length_select.append($("<option></option>")
+                .attr("value", "")
+                .text("Length"));
+            lenselectValues = ['0-25 miles', '25-50 miles', '50-75 miles', '75-100 miles', '> 100 miles'];
+            $.each(lenselectValues, function (index, value) {
+                length_select.append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+            });
+            fatal_label.text("Fatalities:");
+            fatal_select.find('option').remove();
+            fatal_select.append($("<option></option>")
+                .attr("value", "")
+                .text("Fatalities"));
+            fatalselectValues = ['0', '1', '2', '3', '4',
+                '5', '> 5'];
+            $.each(fatalselectValues, function (index, value) {
+                fatal_select.append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+            });
+            inj_select.find('option').remove();
+            inj_select.append($("<option></option>")
+                .attr("value", "")
+                .text("Injuries"));
+            injselectValues = ['0-5', '6-10', '11-20', '21-50', '> 51'];
+            $.each(injselectValues, function (index, value) {
+                inj_select.append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+            });
+            $(form).find(".fatal_div").css("visibility", "visible");
+            $(form).find(".length_div").css("visibility", "visible");
             break;
         case "is_hail":
+            $(form).find(".fatal_div").css("visibility", "visible");
             select.find('option').remove();
             select.append($("<option></option>")
                 .attr("value","")
                 .text("Magnitude"));
             selectValues = ['0-1', '1-2', '2-3', '3-4', '4-5',
-                '5-6'];
+                '5-6', '6-7'];
             $.each(selectValues, function(index,value) {
                 select.append($("<option></option>")
                     .attr("value",value)
                     .text(value));
             });
+            inj_select.find('option').remove();
+            inj_select.append($("<option></option>")
+                .attr("value", "")
+                .text("Injuries"));
+            injselectValues = ['0', '1', '2', '3', '4', '> 4'];
+            $.each(injselectValues, function (index, value) {
+                inj_select.append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+            });
+            $(form).find(".fatal_div").css("visibility", "hidden");
+            $(form).find(".length_div").css("visibility", "hidden");
             break;
         case "is_wind":
             select.find('option').remove();
@@ -41,12 +94,35 @@ function onSelectReportType(ele){
                     .attr("value",value)
                     .text(value));
             });
+            fatal_label.text("Fatalities:");
+            fatal_select.find('option').remove();
+            fatal_select.append($("<option></option>")
+                .attr("value", "")
+                .text("Fatalities"));
+            fatalselectValues = ['0', '1', '2'];
+            $.each(fatalselectValues, function (index, value) {
+                fatal_select.append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+            });
+            inj_select.find('option').remove();
+            inj_select.append($("<option></option>")
+                .attr("value", "")
+                .text("Injuries"));
+            injselectValues = ['0', '1', '2', '4', '5', '>5'];
+            $.each(injselectValues, function (index, value) {
+                inj_select.append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+            });
+            $(form).find(".fatal_div").css("visibility", "visible");
+            $(form).find(".length_div").css("visibility", "hidden");
             break;
         default:
-            $(form).find(".mag").css("visibility", "visible");
+            $(form).find(".fatal_div").css("visibility", "hidden");
+            $(form).find(".length_div").css("visibility", "hidden");
             return;
     }
-    $(form).find(".additional_msg_div").css("visibility", "visible");
 }
 
 function createReport(event) {
@@ -111,6 +187,25 @@ function queryReport(event) {
     });
 }
 
+// function loadDataset(event) {
+//     event.preventDefault(); // stop form from submitting normally
+//
+//     var a = $("#tornado").serializeArray();
+//     a.push({ name: "tab_id", value: "1" });
+//     a = a.filter(function(item){return item.value != '';});
+//     $.ajax({
+//         url: 'HttpServlet',
+//         type: 'POST',
+//         data: a,
+//         success: function(reports) {
+//             mapInitialization(reports);
+//         },
+//         error: function(xhr, status, error) {
+//             alert("Status: " + status + "\nError: " + error);
+//         }
+//     });
+// }
+
 function dateSlider(){
     $( function() {
         $( "#slider-range" ).slider({
@@ -129,3 +224,6 @@ function dateSlider(){
 
 $("#create_report_form").on("submit",createReport);
 $("#query_report_form").on("submit",queryReport);
+// $("#tornado").on("click",loadDataset);
+// $("#hail").on("click",loadDataset);
+// $("#wind").on("click",loadDataset);

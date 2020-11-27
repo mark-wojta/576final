@@ -17,15 +17,14 @@ public class JDBCDemo {
             conn = DriverManager.getConnection(url, "postgres", "admin576");
 
             // query the database
-            String sql = "select * from \"Tornado\" where magnitude = 5";
+            String sql = "select \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
             stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(sql);
 
             // print the result
             if (res != null) {
                 while (res.next()) {
-                    System.out.println("magnitude: " + res.getString("magnitude"));
-                    System.out.println("prop_loss: " + res.getString("prop_loss"));
+                    System.out.println("length: " + res.getString("length"));
                 }
             }
 

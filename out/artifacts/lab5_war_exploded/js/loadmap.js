@@ -13,18 +13,21 @@ function showAllReports() {
         url: 'HttpServlet',
         type: 'POST',
         data: { "tab_id": "1"},
-        success: function(reports) {
+        success: function() {
             mapInitialization(reports);
         },
         error: function(xhr, status, error) {
-            alert("An AJAX error occured: " + status + "\nError: " + error);
+            alert("An AJAX error occurred line 20 loadmap.js: " + status + "\nError: " + error);
         }
     });
 }
 
 function mapInitialization(reports) {
+    const wisconsin  = { lat: 43.784, lng: -88.787 };
+
     var mapOptions = {
-        mapTypeId : google.maps.MapTypeId.ROADMAP, // Set the type of Map
+        mapTypeId : google.maps.MapTypeId.terrain, // Set the type of Map
+        center: wisconsin,
     };
 
     // Render the map within the empty div
@@ -33,56 +36,69 @@ function mapInitialization(reports) {
     var bounds = new google.maps.LatLngBounds ();
 
     $.each(reports, function(i, e) {
-        var long = Number(e['longitude']);
-        var lat = Number(e['latitude']);
-        var latlng = new google.maps.LatLng(lat, long);
+        if (e['event_type'] == "hail" || e['event_type'] == "wind"){
+            var long = Number(e['longitude']);
+            var lat = Number(e['latitude']);
+            var latlng = new google.maps.LatLng(lat, long);
 
-        bounds.extend(latlng);
+            bounds.extend(latlng);
+        }
+        else if (e['event_type'] == "tornado"){
+            const flightPlanCoordinates = [
+                { lat: Number(e['start_lat']), lng: Number(e['start_lon']) },
+                { lat: Number(e['end_lat']), lng: Number(e['end_lon']) },
+            ];
+            console.log(flightPlanCoordinates)
+            const flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+            });
+            bounds.extend(flightPath);
+        }
 
         // Create the infoWindow content
-        var contentStr = '<h4>Report Details</h4><hr>';
-        contentStr += '<p><b>' + 'Disaster' + ':</b>&nbsp' + e['disaster'] + '</p>';
-        contentStr += '<p><b>' + 'Report Type' + ':</b>&nbsp' + e['report_type'] +
+        var contentStr = '<h4>'+ e['event_type'] + '</h4><hr>';
+        contentStr += '<p><b>' + 'Magnitude' + ':</b>&nbsp' + e['magnitude'] + '</p>';
+        contentStr += '<p><b>' + 'County' + ':</b>&nbsp' + e['county'] +
             '</p>';
-        if (e['report_type'] == 'request' || e['report_type'] == 'donation') {
-            contentStr += '<p><b>' + 'Resource Type' + ':</b>&nbsp' +
-                e['resource_type'] + '</p>';
+        contentStr += '<p><b>' + 'Injuries' + ':</b>&nbsp' + e['injuries'] +
+            '</p>';
+        contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +
+            '</p>';
+        if (e['event_type'] == 'tornado') {
+            contentStr += '<p><b>' + 'length' + ':</b>&nbsp' +
+                e['length'] + '</p>';
         }
-        else if (e['report_type'] == 'damage') {
-            contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type']
-                + '</p>';
-        }
-        //code line to add report creator to infoWindow content
-        //(answer to question 1 in lab 6)
-        contentStr += '<p><b>' + 'Reporter' + ':</b>&nbsp' + e['first_name'] + '&nbsp' + e['last_name'] + '</p>';
-        contentStr += '<p><b>' + 'Timestamp' + ':</b>&nbsp' +
-            e['time_stamp'].substring(0,19) + '</p>';
-        if ('message' in e){
-            contentStr += '<p><b>' + 'Message' + ':</b>&nbsp' + e['message'] + '</p>';
-        }
+        // else if (e['report_type'] == 'damage') {
+        //     contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type']
+        //         + '</p>';
+        // }
 
         //code line conditions to add image markers to map based on report type
         //(answer to question 2 in lab 6)
         //images from flaticon.com
-        if (e['report_type'] == 'damage') var icon = {
-            url: "img/damage.png",
-            scaledSize: new google.maps.Size(25,25),
-        }
-        else if (e['report_type'] == 'donation') icon = {
-            url: "img/donation.png",
-            scaledSize: new google.maps.Size(25,25),
-        }
-        else if (e['report_type'] == 'request') icon = {
-            url: "img/request.png",
-            scaledSize: new google.maps.Size(25,25),
-        }
+        // if (e['report_type'] == 'damage') var icon = {
+        //     url: "img/damage.png",
+        //     scaledSize: new google.maps.Size(25,25),
+        // }
+        // else if (e['report_type'] == 'donation') icon = {
+        //     url: "img/donation.png",
+        //     scaledSize: new google.maps.Size(25,25),
+        // }
+        // else if (e['report_type'] == 'request') icon = {
+        //     url: "img/request.png",
+        //     scaledSize: new google.maps.Size(25,25),
+        // }
 
         // Create the marker
         var marker = new google.maps.Marker({ // Set the marker
             position: latlng, // Position marker to coordinates
             map: map, // assign the marker to our map variable
             customInfo: contentStr,
-            icon: icon
+            // icon: icon
         });
 
         // Add a Click Listener to the marker
