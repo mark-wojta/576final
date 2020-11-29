@@ -23,42 +23,25 @@ function showAllReports() {
 }
 
 function mapInitialization(reports) {
-    const wisconsin  = { lat: 43.784, lng: -88.787 };
+    console.log(reports);
+    const wisconsin  = { lat: 44, lng: -88.787 };
 
-    var mapOptions = {
-        mapTypeId : google.maps.MapTypeId.terrain, // Set the type of Map
-        center: wisconsin,
-    };
+    // var mapOptions = {
+    //     mapTypeId : google.maps.MapTypeId.terrain, // Set the type of Map
+    //     center: wisconsin,
+    // };
 
     // Render the map within the empty div
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: wisconsin,
+        zoom: 7,
+        mapTypeId : google.maps.MapTypeId.terrain,
+    });
 
-    var bounds = new google.maps.LatLngBounds ();
+    // var bounds = new google.maps.LatLngBounds ();
 
     $.each(reports, function(i, e) {
-        if (e['event_type'] == "hail" || e['event_type'] == "wind"){
-            var long = Number(e['longitude']);
-            var lat = Number(e['latitude']);
-            var latlng = new google.maps.LatLng(lat, long);
-
-            bounds.extend(latlng);
-        }
-        else if (e['event_type'] == "tornado"){
-            const flightPlanCoordinates = [
-                { lat: Number(e['start_lat']), lng: Number(e['start_lon']) },
-                { lat: Number(e['end_lat']), lng: Number(e['end_lon']) },
-            ];
-            console.log(flightPlanCoordinates)
-            const flightPath = new google.maps.Polyline({
-                path: flightPlanCoordinates,
-                geodesic: true,
-                strokeColor: "#FF0000",
-                strokeOpacity: 1.0,
-                strokeWeight: 2,
-            });
-            bounds.extend(flightPath);
-        }
-
+        console.log(e['event_type']);
         // Create the infoWindow content
         var contentStr = '<h4>'+ e['event_type'] + '</h4><hr>';
         contentStr += '<p><b>' + 'Magnitude' + ':</b>&nbsp' + e['magnitude'] + '</p>';
@@ -68,14 +51,46 @@ function mapInitialization(reports) {
             '</p>';
         contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +
             '</p>';
+        contentStr += '<p><b>' + 'Crop Loss' + ':</b>&nbsp' + e['crop_loss'] +
+            '</p>';
+        contentStr += '<p><b>' + 'Property Loss' + ':</b>&nbsp' + e['prop_loss'] +
+            '</p>';
         if (e['event_type'] == 'tornado') {
             contentStr += '<p><b>' + 'length' + ':</b>&nbsp' +
                 e['length'] + '</p>';
         }
-        // else if (e['report_type'] == 'damage') {
-        //     contentStr += '<p><b>' + 'Damage Type' + ':</b>&nbsp' + e['damage_type']
-        //         + '</p>';
-        // }
+
+        if (e['event_type'] == "hail" || e['event_type'] == "wind"){
+            var long = Number(e['longitude']);
+            var lat = Number(e['latitude']);
+            var latlng = new google.maps.LatLng(lat, long);
+            console.log(latlng);
+            // bounds.extend(latlng);
+        }
+        else if (e['event_type'] == "tornado"){
+            const tornadoCoordinates = [
+                { lat: Number(e['start_lat']), lng: Number(e['start_lon']) },
+                { lat: Number(e['end_lat']), lng: Number(e['end_lon']) },
+            ];
+            console.log(tornadoCoordinates)
+            const tornadoPath = new google.maps.Polyline({
+                path: tornadoCoordinates,
+                geodesic: true,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 3,
+            });
+
+            // Add a Click Listener to the marker
+            google.maps.event.addListener(tornadoPath, 'click', function() {
+                // use 'customInfo' to customize infoWindow
+                infowindow.setContent(marker['customInfo']);
+                infowindow.open(map, marker); // Open InfoWindow
+            });
+
+            // bounds.extend(tornadoPath);
+            tornadoPath.setMap(map);
+        }
 
         //code line conditions to add image markers to map based on report type
         //(answer to question 2 in lab 6)
@@ -110,7 +125,7 @@ function mapInitialization(reports) {
 
     });
 
-    map.fitBounds (bounds);
+    // map.fitBounds (bounds);
 
 }
 

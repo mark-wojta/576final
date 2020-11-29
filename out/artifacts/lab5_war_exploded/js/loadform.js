@@ -222,6 +222,10 @@ function dateSlider(){
     } );
 }
 
+function createAlert(){
+    alert ("One or more fields is empty");
+}
+
 $("#create_report_form").on("submit",createReport);
 $("#query_report_form").on("submit",queryReport);
 // $("#tornado").on("click",loadDataset);
