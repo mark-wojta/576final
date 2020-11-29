@@ -6,6 +6,7 @@
   <title>Web Project</title>
 
   <!-- Custom styles -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- jQuery -->
@@ -33,14 +34,14 @@
 
       <!-- Tab Navis-->
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#create_event" data-toggle="tab">Report Event</a></li>
-        <li><a href="#query_report" data-toggle="tab">Search</a></li>
+        <li><a href="#create_event" data-toggle="tab">Report Event</a></li>
+        <li class="active"><a href="#query_report" data-toggle="tab">Query Events</a></li>
       </ul>
 
       <!-- Tab panes -->
       <div class="tab-content ">
         <!-- Create Report Tab Panel -->
-        <div class="tab-pane active" id="create_event">
+        <div class="tab-pane" id="create_event">
           <form id = "create_event_form">
             <div><label>Select a disaster event type: </label>
               <select onchange="onSelectReportType(this)" name="report_type">
@@ -77,7 +78,7 @@
         </div>
 
         <!-- Query Report Tab Panel -->
-        <div class="tab-pane" id="query_report">
+        <div class="tab-pane active" id="query_report">
           <form id = "query_report_form">
             <select onchange="onSelectReportType(this)" name="event_type">
               <option value="">Choose the event type</option>

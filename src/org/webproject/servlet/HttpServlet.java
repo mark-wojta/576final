@@ -130,7 +130,6 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         System.out.println("HttpServlet: starting queryReport()");
 
         String event_type = request.getParameter("event_type");
-        System.out.println("event_type:" + event_type);
         String magnitude = request.getParameter("magnitude");
 //        String date = request.getParameter("date");
 //        String year = date.split("-")[0];
@@ -139,22 +138,21 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 //        String time = request.getParameter("time");
         String injuries = request.getParameter("injuries");
         String fatalities = request.getParameter("fatalities");
-//        String prop_loss = request.getParameter("prop_loss");
-//        String crop_loss = request.getParameter("crop_loss");
         String county = request.getParameter("county");
         String length = request.getParameter("length");
+
+        if (event_type == null){
+            event_type = "Tornado";
+            String sql = "select \"Tornado\".prop_loss, \"Tornado\".crop_loss, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
+            queryReportHelper(sql,list,"tornado");
+        }
 
         // tornado event
         if (event_type.equalsIgnoreCase("is_tornado")) {
             System.out.println("HttpServlet: starting tornado");
             String sql;
-//            if (county != null){
-//                sql = "select length, magnitude, fatalities, injuries, start_lat, start_lon, end_lat, end_lon from \"Tornado\" where ";
-//            }
-//            else {
                 sql = "select \"Tornado\".prop_loss, \"Tornado\".crop_loss, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
                 System.out.println(county);
-//            }
             if (county !=null) {
                 sql += " and county_nam = '" + county + "'";
             }
@@ -316,8 +314,6 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         System.out.println("HttpServlet: starting queryReportHelper()");
         ResultSet res = dbutil.queryDB(sql);
         while (res.next()) {
-            System.out.println("Event type:" + event_type);
-            System.out.println(res);
             // add to response
             HashMap<String, String> m = new HashMap<String,String>();
                 m.put("magnitude", res.getString("magnitude"));
@@ -332,16 +328,16 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
                 m.put("start_lon", res.getString("start_lon"));
                 m.put("end_lat", res.getString("end_lat"));
                 m.put("end_lon", res.getString("end_lon"));
-                m.put("county", res.getString("prop_loss"));
-                m.put("county", res.getString("crop_loss"));
+                m.put("prop_loss", res.getString("prop_loss"));
+                m.put("crop_loss", res.getString("crop_loss"));
             }
             if (event_type.equalsIgnoreCase("hail")) {
                 m.put("event_type", event_type);
                 m.put("longitude", res.getString("longitude"));
                 m.put("latitude", res.getString("latitude"));
                 m.put("county", res.getString("county"));
-                m.put("county", res.getString("prop_loss"));
-                m.put("county", res.getString("crop_loss"));
+                m.put("prop_loss", res.getString("prop_loss"));
+                m.put("crop_loss", res.getString("crop_loss"));
             }
             if (event_type.equalsIgnoreCase("wind")) {
                 m.put("event_type", event_type);
@@ -349,8 +345,8 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
                 m.put("latitude", res.getString("latitude"));
                 m.put("fatalities", res.getString("fatalities"));
                 m.put("county", res.getString("county"));
-                m.put("county", res.getString("prop_loss"));
-                m.put("county", res.getString("crop_loss"));
+                m.put("prop_loss", res.getString("prop_loss"));
+                m.put("crop_loss", res.getString("crop_loss"));
             }
             list.put(m);
         }

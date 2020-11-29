@@ -5,7 +5,7 @@ var infowindow = new google.maps.InfoWindow();
 
 function initialization() {
     showAllReports();
-    initAutocomplete();
+    // initAutocomplete();
 }
 
 function showAllReports() {
@@ -13,7 +13,7 @@ function showAllReports() {
         url: 'HttpServlet',
         type: 'POST',
         data: { "tab_id": "1"},
-        success: function() {
+        success: function(reports) {
             mapInitialization(reports);
         },
         error: function(xhr, status, error) {
@@ -24,24 +24,200 @@ function showAllReports() {
 
 function mapInitialization(reports) {
     console.log(reports);
-    const wisconsin  = { lat: 44, lng: -88.787 };
+    // Basemap style from Snazzy Maps
+    var snazzyMonochrome = [
+        {
+            "featureType": "all",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "saturation": 36
+                },
+                {
+                    "color": "#333333"
+                },
+                {
+                    "lightness": 40
+                }
+            ]
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "visibility": "on"
+                },
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 16
+                }
+            ]
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#fefefe"
+                },
+                {
+                    "lightness": 20
+                }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#fefefe"
+                },
+                {
+                    "lightness": 17
+                },
+                {
+                    "weight": 1.2
+                }
+            ]
+        },
+        {
+            "featureType": "landscape",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f2f2f2"
+                },
+                {
+                    "lightness": "0"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#d6d7de"
+                },
+                {
+                    "lightness": "0"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#d6d7de"
+                },
+                {
+                    "lightness": "0"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 17
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 29
+                },
+                {
+                    "weight": 0.2
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 18
+                }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#ffffff"
+                },
+                {
+                    "lightness": 16
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#f2f2f2"
+                },
+                {
+                    "lightness": 19
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#b9c1c8"
+                },
+                {
+                    "lightness": "0"
+                }
+            ]
+        }
+    ]
 
-    // var mapOptions = {
-    //     mapTypeId : google.maps.MapTypeId.terrain, // Set the type of Map
-    //     center: wisconsin,
-    // };
+    const wisconsin  = { lat: 44.3, lng: -88.787 };
 
     // Render the map within the empty div
     map = new google.maps.Map(document.getElementById('map-canvas'), {
         center: wisconsin,
         zoom: 7,
-        mapTypeId : google.maps.MapTypeId.terrain,
+        styles: snazzyMonochrome,
+        // mapTypeId : google.maps.MapTypeId.terrain,
     });
 
-    // var bounds = new google.maps.LatLngBounds ();
+    var bounds = new google.maps.LatLngBounds ();
 
     $.each(reports, function(i, e) {
-        console.log(e['event_type']);
         // Create the infoWindow content
         var contentStr = '<h4>'+ e['event_type'] + '</h4><hr>';
         contentStr += '<p><b>' + 'Magnitude' + ':</b>&nbsp' + e['magnitude'] + '</p>';
@@ -49,8 +225,10 @@ function mapInitialization(reports) {
             '</p>';
         contentStr += '<p><b>' + 'Injuries' + ':</b>&nbsp' + e['injuries'] +
             '</p>';
-        contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +
-            '</p>';
+        if (e['event_type'] != 'hail'){
+            contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +
+                '</p>';
+        }
         contentStr += '<p><b>' + 'Crop Loss' + ':</b>&nbsp' + e['crop_loss'] +
             '</p>';
         contentStr += '<p><b>' + 'Property Loss' + ':</b>&nbsp' + e['prop_loss'] +
@@ -64,68 +242,88 @@ function mapInitialization(reports) {
             var long = Number(e['longitude']);
             var lat = Number(e['latitude']);
             var latlng = new google.maps.LatLng(lat, long);
-            console.log(latlng);
-            // bounds.extend(latlng);
+            const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";
+            const icons = {
+                hail: {
+                    url: iconBase + "blu-blank-lv.png",
+                    scaledSize: new google.maps.Size(10, 10)
+                },
+                wind: {
+                    url: iconBase + "ylw-blank-lv.png",
+                    scaledSize: new google.maps.Size(10, 10)
+                },
+            };
+            var icon;
+
+            if (e['event_type'] == "hail"){
+                icon = icons["wind"];
+            }
+            else{
+                icon = icons["hail"];
+            }
+            // Create the marker
+            var marker = new google.maps.Marker({ // Set the marker
+                position: latlng, // Position marker to coordinates
+                map: map, // assign the marker to our map variable
+                customInfo: contentStr,
+                icon: icon
+            });
+
+            // Add a Click Listener to the marker
+            google.maps.event.addListener(marker, 'click', function() {
+                // use 'customInfo' to customize infoWindow
+                infowindow.setContent(marker['customInfo']);
+                infowindow.open(map, marker); // Open InfoWindow
+            });
+
+            bounds.extend(latlng);
         }
         else if (e['event_type'] == "tornado"){
             const tornadoCoordinates = [
                 { lat: Number(e['start_lat']), lng: Number(e['start_lon']) },
                 { lat: Number(e['end_lat']), lng: Number(e['end_lon']) },
             ];
-            console.log(tornadoCoordinates)
+            
+            var long = Number(e['start_lon']);
+            var lat = Number(e['start_lat']);
+            var latlng = new google.maps.LatLng(lat, long);
+            
             const tornadoPath = new google.maps.Polyline({
                 path: tornadoCoordinates,
                 geodesic: true,
                 strokeColor: "#FF0000",
                 strokeOpacity: 1.0,
-                strokeWeight: 3,
+                strokeWeight: 3.5,
+                customInfo: contentStr,
             });
 
-            // Add a Click Listener to the marker
+            // Create the marker
+            var marker = new google.maps.Marker({ // Set the marker
+                position: latlng, // Position marker to coordinates
+                map: map, // assign the marker to our map variable
+                customInfo: contentStr,
+                icon: {path: google.maps.SymbolPath.CIRCLE,
+                    scale: 0},
+            });
+
+            // Add a Click Listener to the tornado path
             google.maps.event.addListener(tornadoPath, 'click', function() {
                 // use 'customInfo' to customize infoWindow
                 infowindow.setContent(marker['customInfo']);
                 infowindow.open(map, marker); // Open InfoWindow
             });
 
-            // bounds.extend(tornadoPath);
+            bounds.extend(latlng);
             tornadoPath.setMap(map);
         }
 
-        //code line conditions to add image markers to map based on report type
-        //(answer to question 2 in lab 6)
-        //images from flaticon.com
-        // if (e['report_type'] == 'damage') var icon = {
-        //     url: "img/damage.png",
-        //     scaledSize: new google.maps.Size(25,25),
-        // }
-        // else if (e['report_type'] == 'donation') icon = {
-        //     url: "img/donation.png",
-        //     scaledSize: new google.maps.Size(25,25),
-        // }
-        // else if (e['report_type'] == 'request') icon = {
-        //     url: "img/request.png",
-        //     scaledSize: new google.maps.Size(25,25),
-        // }
-
-        // Create the marker
-        var marker = new google.maps.Marker({ // Set the marker
-            position: latlng, // Position marker to coordinates
-            map: map, // assign the marker to our map variable
-            customInfo: contentStr,
-            // icon: icon
-        });
-
-        // Add a Click Listener to the marker
-        google.maps.event.addListener(marker, 'click', function() {
-            // use 'customInfo' to customize infoWindow
-            infowindow.setContent(marker['customInfo']);
-            infowindow.open(map, marker); // Open InfoWindow
-        });
-
     });
-
-    // map.fitBounds (bounds);
+     if (reports.length != 0) {
+         map.fitBounds (bounds);
+     }
+     else{
+         console.log("array is 0");
+     }
 
 }
 
