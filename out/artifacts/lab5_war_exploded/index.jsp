@@ -80,6 +80,14 @@
         <!-- Query Report Tab Panel -->
         <div class="tab-pane active" id="query_report">
           <form id = "query_report_form">
+<%--            <h2>View a dataset:</h2>--%>
+<%--            <input type="radio" id="tornado" name="event_type" value="tornado">--%>
+<%--            <label for="tornado">Tornado</label><br>--%>
+<%--            <input type="radio" id="hail" name="event_type" value="hail">--%>
+<%--            <label for="hail">Hail</label><br>--%>
+<%--            <input type="radio" id="wind" name="event_type" value="wind">--%>
+<%--            <label for="wind">Wind</label>--%>
+            <h2>Query the data:</h2>
             <select onchange="onSelectReportType(this)" name="event_type">
               <option value="">Choose the event type</option>
               <option value="is_tornado">Tornado</option>

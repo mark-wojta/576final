@@ -23,7 +23,6 @@ function showAllReports() {
 }
 
 function mapInitialization(reports) {
-    console.log(reports);
     // Basemap style from Snazzy Maps
     var snazzyMonochrome = [
         {
@@ -242,6 +241,7 @@ function mapInitialization(reports) {
             var long = Number(e['longitude']);
             var lat = Number(e['latitude']);
             var latlng = new google.maps.LatLng(lat, long);
+
             const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";
             const icons = {
                 hail: {
@@ -283,11 +283,11 @@ function mapInitialization(reports) {
                 { lat: Number(e['start_lat']), lng: Number(e['start_lon']) },
                 { lat: Number(e['end_lat']), lng: Number(e['end_lon']) },
             ];
-            
+
             var long = Number(e['start_lon']);
             var lat = Number(e['start_lat']);
             var latlng = new google.maps.LatLng(lat, long);
-            
+
             const tornadoPath = new google.maps.Polyline({
                 path: tornadoCoordinates,
                 geodesic: true,
@@ -318,12 +318,8 @@ function mapInitialization(reports) {
         }
 
     });
-     if (reports.length != 0) {
-         map.fitBounds (bounds);
-     }
-     else{
-         console.log("array is 0");
-     }
+
+    map.fitBounds (bounds);
 
 }
 

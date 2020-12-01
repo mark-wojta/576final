@@ -151,8 +151,8 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         if (event_type.equalsIgnoreCase("is_tornado")) {
             System.out.println("HttpServlet: starting tornado");
             String sql;
-                sql = "select \"Tornado\".prop_loss, \"Tornado\".crop_loss, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
-                System.out.println(county);
+            sql = "select \"Tornado\".prop_loss, \"Tornado\".crop_loss, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
+            System.out.println(county);
             if (county !=null) {
                 sql += " and county_nam = '" + county + "'";
             }
@@ -316,8 +316,8 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         while (res.next()) {
             // add to response
             HashMap<String, String> m = new HashMap<String,String>();
-                m.put("magnitude", res.getString("magnitude"));
-                m.put("injuries", res.getString("injuries"));
+            m.put("magnitude", res.getString("magnitude"));
+            m.put("injuries", res.getString("injuries"));
             if (event_type.equalsIgnoreCase("tornado")) {
                 System.out.println("Event type:" + event_type);
                 m.put("event_type", event_type);
