@@ -23,6 +23,7 @@ function showAllReports() {
 }
 
 function mapInitialization(reports) {
+    console.log(reports);
     // Basemap style from Snazzy Maps
     var snazzyMonochrome = [
         {
@@ -319,7 +320,12 @@ function mapInitialization(reports) {
 
     });
 
-    map.fitBounds (bounds);
+    if (reports.length > 0){
+        map.fitBounds (bounds);
+    }
+   else{
+       console.log("No events returned");
+    }
 
 }
 

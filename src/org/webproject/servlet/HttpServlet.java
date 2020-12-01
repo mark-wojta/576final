@@ -156,7 +156,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
             if (county !=null) {
                 sql += " and county_nam = '" + county + "'";
             }
-            if (fatalities !=null && fatalities.equals(">5")) {
+            if (fatalities !=null && fatalities.equals("> 5")) {
                 sql += " and fatalities " + fatalities;
             }else if (fatalities != null){
                 sql += " and fatalities = " + fatalities;
