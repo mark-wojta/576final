@@ -12,7 +12,7 @@ function onSelectReportType(ele){
             select.find('option').remove();
             select.append($("<option></option>")
                 .attr("value", "")
-                .text("Magnitude"));
+                .text("EF Scale Rating"));
             selectValues = ['0', '1', '2', '3', '4',
                 '5'];
             $.each(selectValues, function (index, value) {
@@ -24,7 +24,7 @@ function onSelectReportType(ele){
             length_select.find('option').remove();
             length_select.append($("<option></option>")
                 .attr("value", "")
-                .text("Length"));
+                .text("Miles"));
             lenselectValues = ['0-25 miles', '25-50 miles', '50-75 miles', '75-100 miles', '> 100 miles'];
             $.each(lenselectValues, function (index, value) {
                 length_select.append($("<option></option>")
@@ -61,7 +61,7 @@ function onSelectReportType(ele){
             select.find('option').remove();
             select.append($("<option></option>")
                 .attr("value","")
-                .text("Magnitude"));
+                .text("Hail Diameter (inches)"));
             selectValues = ['0-1', '1-2', '2-3', '3-4', '4-5',
                 '5-6', '6-7'];
             $.each(selectValues, function(index,value) {
@@ -86,7 +86,7 @@ function onSelectReportType(ele){
             select.find('option').remove();
             select.append($("<option></option>")
                 .attr("value","")
-                .text("Magnitude"));
+                .text("Wind Speed (mph)"));
             selectValues = ['0-25 mph', '25-50 mph', '50-75 mph', '75-100 mph',
                 '> 100 mph'];
             $.each(selectValues, function(index,value) {
@@ -124,6 +124,7 @@ function onSelectReportType(ele){
             return;
     }
 }
+
 
 function createReport(event) {
     event.preventDefault(); // stop form from submitting normally
