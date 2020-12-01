@@ -1,21 +1,54 @@
 html,body{
-    background-color: #f5f5f5;
+    background: #0A2390;
+}
+
+form#more_info_form h4 {
+    color: #ffffff;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+form#more_info_form h5 {
+    color: #ffffff;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+form#more_info_form ul li a {
+    color: #91bad6;
+    font-size: 100%;
+}
+
+form#more_info_form ul li a:hover {
+    color: #528aae;
+}
+
+::marker {
+    color: #ffffff;
+    background: #ffffff;
+}
+
+p {
+    color: #ffffff;
+    font-size: 100%;
 }
 
 body {
     padding-top: 50px;
 }
 
-.container-fluid, .row{
-    background-color: #f5f5f5;
-}
 .sidebar {
     padding: 12px;
-    background-color: #f5f5f5;
+    background: #0A2390;
 }
 
 form {
     padding-top: 12px;
+    background: #0A2390;
+}
+
+label {
+    color: #fff;
 }
 
 #map-canvas {
@@ -24,14 +57,32 @@ form {
     right:0;
 }
 
-.slider-range{
-    background: #729fcf;
+.nav.nav-pills a:hover{
+    background-color: #2d3337;
 }
 
-.ui-slider-range {
-    background: #729fcf;
+ul#pills-tab.nav.nav-pills.red li.active a{
+    background-color: #ffffff;
+    color: #0A2390;
+    border: 2px solid #ffffff;
+    font-weight: bold;
 }
 
-#blue .ui-slider-handle {
-    border-color: #729fcf;
+ul#pills-tab.nav.nav-pills.red li a{
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    font-weight: bold;
+}
+
+nav.navbar.navbar-inverse.navbar-fixed-top {
+    background-color: #2d3337;
+}
+
+nav.navbar.navbar-inverse.navbar-fixed-top a.navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+nav.navbar.navbar-inverse.navbar-fixed-top a:hover {
+    color: #ffffff;
 }

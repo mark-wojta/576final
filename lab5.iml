@@ -49,6 +49,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.105" level="application_server_libraries" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 7.0.105" level="application_server_libraries" />
   </component>
 </module>

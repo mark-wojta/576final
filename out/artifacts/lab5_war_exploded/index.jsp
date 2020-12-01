@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" align="center">
   <a class="navbar-brand">Severe Weather Wisconsin</a>
 </nav>
 
@@ -33,15 +33,16 @@
     <div class="sidebar col-xs-3">
 
       <!-- Tab Navis-->
-      <ul class="nav nav-tabs">
-        <li><a href="#create_event" data-toggle="tab">Report Event</a></li>
-        <li class="active"><a href="#query_report" data-toggle="tab">Query Events</a></li>
+      <ul class="nav nav-pills red" id="pills-tab" role="tablist">
+        <li class="active"><a href="#create_event" data-toggle="tab">Report Event</a></li>
+        <li><a href="#query_report" data-toggle="tab">Query Event</a></li>
+        <li><a href="#more_report" data-toggle="tab">More</a></li>
       </ul>
 
       <!-- Tab panes -->
-      <div class="tab-content ">
+      <div class="tab-content" id="pills-tabContent">
         <!-- Create Report Tab Panel -->
-        <div class="tab-pane" id="create_event">
+        <div class="tab-pane" id="create_event" role="tabpanel">
           <form id = "create_event_form">
             <div><label>Select a disaster event type: </label>
               <select onchange="onSelectReportType(this)" name="report_type">
@@ -78,7 +79,7 @@
         </div>
 
         <!-- Query Report Tab Panel -->
-        <div class="tab-pane active" id="query_report">
+        <div class="tab-pane" id="query_report" role="tabpanel">
           <form id = "query_report_form">
 <%--            <h2>View a dataset:</h2>--%>
 <%--            <input type="radio" id="tornado" name="event_type" value="tornado">--%>
@@ -211,6 +212,27 @@
             <button type="submit" class="btn btn-default">
               <span class="glyphicon glyphicon-star"></span> Submit the query
             </button>
+          </form>
+        </div>
+
+        <div class="tab-pane" id="more_report" role="tabpanel">
+          <form id = "more_info_form">
+            <h4>About:</h4>
+            <p>This app displays tornado, wind, and hail events in Wisconsin. The user can view storm event
+              attributes including fatalities,
+              injuries, crop loss, property loss, date, length in miles as popups on the map.
+              The user can then determine where and how many storm events occurred in a given time period,
+              where and how many severe storms occurred, and where/how many fatalities, injuries, or damage
+              to property resulted from various storm events.
+              The purpose of this app is to provide data to aid in formulating a mitigation plan
+              or disaster response plan for areas of Wisconsin that are likely to experience severe storms.
+              It could also indicate where funding should be focused on projects like tornado saferooms and
+              storm shelters. </p>
+            <h5>Links:</h5>
+            <ul>
+              <li><a href="https://www.spc.noaa.gov/gis/svrgis/">National Oceanic and Atmospheric Administration (Source Data and More National Weather Data)</a></li>
+              <li><a href="https://search.library.wisc.edu/search/digital?q=tornadoes">University of Wisconsin-Madison Libraries (Archived Wisconsin Tornado Imagery)</a></li>
+            </ul>
           </form>
         </div>
       </div>
