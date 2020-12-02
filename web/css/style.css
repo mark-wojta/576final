@@ -2,6 +2,21 @@ html,body{
     background: #0A2390;
 }
 
+form#query_report_form h3 {
+    color: #fff;
+    font-weight: bold;
+}
+
+form#query_report_form h4 {
+    color: #fff;
+    font-weight: bold;
+}
+
+form#query_report_form h5 {
+    color: #fff;
+    font-weight: bold;
+}
+
 form#more_info_form h4 {
     color: #ffffff;
     font-size: 110%;

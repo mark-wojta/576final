@@ -24,7 +24,7 @@ function onSelectReportType(ele){
             length_select.find('option').remove();
             length_select.append($("<option></option>")
                 .attr("value", "")
-                .text("Length (miles)"));
+                .text("Miles"));
             lenselectValues = ['0-25 miles', '25-50 miles', '50-75 miles', '75-100 miles', '> 100 miles'];
             $.each(lenselectValues, function (index, value) {
                 length_select.append($("<option></option>")
