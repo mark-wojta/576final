@@ -23,7 +23,6 @@ function showAllReports() {
 }
 
 function mapInitialization(reports) {
-    console.log(reports);
     // Basemap style from Snazzy Maps
     var snazzyMonochrome = [
         {
@@ -212,7 +211,6 @@ function mapInitialization(reports) {
         center: wisconsin,
         zoom: 7,
         styles: snazzyMonochrome,
-        // mapTypeId : google.maps.MapTypeId.terrain,
     });
 
     var bounds = new google.maps.LatLngBounds ();
@@ -224,6 +222,8 @@ function mapInitialization(reports) {
         contentStr += '<p><b>' + 'County' + ':</b>&nbsp' + e['county'] +
             '</p>';
         contentStr += '<p><b>' + 'Injuries' + ':</b>&nbsp' + e['injuries'] +
+            '</p>';
+        contentStr += '<p><b>' + 'Date' + ':</b>&nbsp' + e['date'] +
             '</p>';
         if (e['event_type'] != 'hail'){
             contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +

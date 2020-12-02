@@ -204,10 +204,15 @@
             </div>
             <hr>
             <p>
-              <label for="amount">Filter by date:</label>
-              <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+              <label for="date">Filter by year:</label>
+              <input type="text" id="date" name="date" readonly style="border:0; color:#ffffff; font-weight:bold;">
             </p>
             <div id="slider-range"></div>
+            <p>
+              <label for="month">Filter by month:</label>
+              <input type="text" id="month" name="month" readonly style="border:0; color:#ffffff; font-weight:bold;">
+            </p>
+            <div id="slider-range-month"></div>
 
             <button type="submit" class="btn btn-default">
               <span class="glyphicon glyphicon-star"></span> Submit the query

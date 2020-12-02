@@ -81,14 +81,6 @@
         <!-- Query Report Tab Panel -->
         <div class="tab-pane" id="query_report" role="tabpanel">
           <form id = "query_report_form">
-<%--            <h2>View a dataset:</h2>--%>
-<%--            <input type="radio" id="tornado" name="event_type" value="tornado">--%>
-<%--            <label for="tornado">Tornado</label><br>--%>
-<%--            <input type="radio" id="hail" name="event_type" value="hail">--%>
-<%--            <label for="hail">Hail</label><br>--%>
-<%--            <input type="radio" id="wind" name="event_type" value="wind">--%>
-<%--            <label for="wind">Wind</label>--%>
-            <h2>Query the data:</h2>
             <select onchange="onSelectReportType(this)" name="event_type">
               <option value="">Choose the event type</option>
               <option value="is_tornado">Tornado</option>
@@ -204,10 +196,15 @@
             </div>
             <hr>
             <p>
-              <label for="amount">Filter by date:</label>
-              <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+              <label for="date">Filter by year:</label>
+              <input type="text" id="date" name="date" readonly style="border:0; color:#ffffff; font-weight:bold;">
             </p>
             <div id="slider-range"></div>
+            <p>
+              <label for="month">Filter by month:</label>
+              <input type="text" id="month" name="month" readonly style="border:0; color:#ffffff; font-weight:bold;">
+            </p>
+            <div id="slider-range-month"></div>
 
             <button type="submit" class="btn btn-default">
               <span class="glyphicon glyphicon-star"></span> Submit the query

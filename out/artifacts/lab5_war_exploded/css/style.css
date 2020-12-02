@@ -86,3 +86,26 @@ nav.navbar.navbar-inverse.navbar-fixed-top a.navbar-brand {
 nav.navbar.navbar-inverse.navbar-fixed-top a:hover {
     color: #ffffff;
 }
+
+#slider-range{
+    margin-bottom: 10px;
+}
+
+#slider-range-month{
+    margin-bottom: 10px;
+}
+
+.ui-slider-range {
+    background: #ef2929;
+    border-color: #ef2929;
+}
+
+#date{
+    background-color: #0A2390;
+    outline: none;
+}
+
+#month{
+    background-color: #0A2390;
+    outline: none;
+}

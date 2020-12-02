@@ -152,7 +152,7 @@ function createReport(event) {
                     onPlaceChanged();
                 },
                 error: function(xhr, status, error) {
-                    alert("An AJAX error occured: " + status + "\nError: " + error);
+                    alert("An AJAX error occurred: " + status + "\nError: " + error);
                 }
             });
         },
@@ -187,47 +187,36 @@ function queryReport(event) {
     });
 }
 
-// function loadDataset(event) {
-//     event.preventDefault(); // stop form from submitting normally
-//
-//     var a = $("#tornado").serializeArray();
-//     a.push({ name: "tab_id", value: "1" });
-//     a = a.filter(function(item){return item.value != '';});
-//     $.ajax({
-//         url: 'HttpServlet',
-//         type: 'POST',
-//         data: a,
-//         success: function(reports) {
-//             mapInitialization(reports);
-//         },
-//         error: function(xhr, status, error) {
-//             alert("Status: " + status + "\nError: " + error);
-//         }
-//     });
-// }
-
 function dateSlider(){
     $( function() {
         $( "#slider-range" ).slider({
             range: true,
-            min: 0,
-            max: 500,
-            values: [ 75, 300 ],
+            min: 1950,
+            max: 2018,
+            values: [ 1950, 2018 ],
             slide: function( event, ui ) {
-                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                $( "#date" ).val( ui.values[ 0 ] + "-" + ui.values[ 1 ] );
             }
         });
-        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-            " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+        $( "#date" ).val($( "#slider-range" ).slider( "values", 0 ) +
+            "-" + $( "#slider-range" ).slider( "values", 1 ) );
+    } );
+    $( function() {
+        $( "#slider-range-month" ).slider({
+            range: true,
+            min: 1,
+            max: 12,
+            values: [ 1, 12 ],
+            slide: function( event, ui ) {
+                $( "#month" ).val( ui.values[ 0 ] + "-" + ui.values[ 1 ] );
+            }
+        });
+        $( "#month" ).val($( "#slider-range-month" ).slider( "values", 0 ) +
+            "-" + $( "#slider-range-month" ).slider( "values", 1 ) );
     } );
 }
 
-function createAlert(){
-    alert ("One or more fields is empty");
-}
 
 $("#create_report_form").on("submit",createReport);
 $("#query_report_form").on("submit",queryReport);
-// $("#tornado").on("click",loadDataset);
-// $("#hail").on("click",loadDataset);
-// $("#wind").on("click",loadDataset);
+$(window).on("load", dateSlider);
