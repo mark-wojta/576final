@@ -19,7 +19,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <!-- Google Map js libraries -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2PuNWeVXTLl_3jEee5Y0dy0YWgrUw6Bs&libraries=geometry,places" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi4AhR1NvdOFDiotj-_XmElmzDcVhvH5U&libraries=geometry,places" type="text/javascript"></script>
 
 </head>
 
@@ -55,7 +55,8 @@
             <hr weight>
             <div><label>Fatalities:&nbsp</label><input placeholder="Number of fatalities" name="fatalities"></div>
             <div><label>Injuries:&nbsp</label><input placeholder="Number of injuries" name="injuries"></div>
-            <div><label>Date:&nbsp</label><input placeholder="year-month-day" name="date"></div>
+            <div><label>Date:&nbsp</label><input placeholder="YYYY-MM-DD" name="date"></div>
+            <div><label>Time:&nbsp</label><input placeholder="HH:MM:SS" name="time"></div>
 <%--            <div class="additional_msg_div" style="visibility: hidden"><label class="additional_msg"></label>--%>
 <%--              <select class="additional_msg_select" name="additional_message"></select>--%>
 <%--            </div>--%>
@@ -102,6 +103,76 @@
                 <option value="">Select a County</option>
                 <option value="Adams">Adams</option>
                 <option value ="Ashland">Ashland</option>
+                <option value="Barron">Barron</option>
+                <option value="Bayfield">Bayfield</option>
+                <option value="Brown">Brown</option>
+                <option value="Buffalo">Buffalo</option>
+                <option value="Burnett">Burnett</option>
+                <option value="Calumet">Calumet</option>
+                <option value="Chippewa">Chippewa</option>
+                <option value="Clark">Clark</option>
+                <option value="Columbia">Columbia</option>
+                <option value="Crawford">Crawford</option>
+                <option value="Dane">Dane</option>
+                <option value="Dodge">Dodge</option>
+                <option value="Door">Door</option>
+                <option value="Douglas">Douglas</option>
+                <option value="Dunn">Dunn</option>
+                <option value="Eau Claire">Eau Claire</option>
+                <option value="Florence">Florence</option>
+                <option value="Fond Du Lac">Fond Du Lac</option>
+                <option value="Forest">Forest</option>
+                <option value="Grant">Grant</option>
+                <option value="Green">Green</option>
+                <option value="Green Lake">Green Lake</option>
+                <option value="Iowa">Iowa</option>
+                <option value="Iron">Iron</option>
+                <option value="Jackson">Jackson</option>
+                <option value="Jefferson">Jefferson</option>
+                <option value="Juneau">Juneau</option>
+                <option value="Kenosha">Kenosha</option>
+                <option value="Kewaunee">Kewaunee</option>
+                <option value="La Crosse">La Crosse</option>
+                <option value="Lafayette">Lafayette</option>
+                <option value="Langlade">Langlade</option>
+                <option value="Lincoln">Lincoln</option>
+                <option value="Manitowoc">Manitowoc</option>
+                <option value="Marathon">Marathon</option>
+                <option value="Marinette">Marinette</option>
+                <option value="Marquette">Marquette</option>
+                <option value="Menominee">Menominee</option>
+                <option value="Milwaukee">Milwaukee</option>
+                <option value="Monroe">Monroe</option>
+                <option value="Oconto">Oconto</option>
+                <option value="Oneida">Oneida</option>
+                <option value="Outagamie">Outagamie</option>
+                <option value="Ozaukee">Ozuakee</option>
+                <option value="Pepin">Pepin</option>
+                <option value="Pierce">Pierce</option>
+                <option value="Polk">Polk</option>
+                <option value="Portage">Portage</option>
+                <option value="Price">Price</option>
+                <option value="Racine">Racine</option>
+                <option value="Richland">Richland</option>
+                <option value="Rock">Rock</option>
+                <option value="Rusk">Rusk</option>
+                <option value="St. Croix">St. Croix</option>
+                <option value="Sauk">Sauk</option>
+                <option value="Sawyer">Sawyer</option>
+                <option value="Shawano">Shawano</option>
+                <option value="Sheboygan">Sheboygan</option>
+                <option value="Taylor">Taylor</option>
+                <option value="Trempealeau">Trempeleau</option>
+                <option value="Vernon">Vernon</option>
+                <option value="Vilas">Vilas</option>
+                <option value="Walworth">Walworth</option>
+                <option value="Washburn">Washburn</option>
+                <option value="Washington">Washington</option>
+                <option value="Waukesha">Waukesha</option>
+                <option value="Waupaca">Waupaca</option>
+                <option value="Waushara">Waushara</option>
+                <option value="Winnebago">Winnebago</option>
+                <option value="Wood">Wood</option>
               </select>
             </div>
             <hr>

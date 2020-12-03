@@ -5,7 +5,7 @@ var infowindow = new google.maps.InfoWindow();
 
 function initialization() {
     showAllReports();
-    // initAutocomplete();
+    initAutocomplete();
 }
 
 function showAllReports() {
@@ -239,8 +239,8 @@ function mapInitialization(reports) {
         }
 
         if (e['event_type'] == "hail" || e['event_type'] == "wind"){
-            var long = Number(e['longitude']);
-            var lat = Number(e['latitude']);
+            var long = Number(e['lon']);
+            var lat = Number(e['lat']);
             var latlng = new google.maps.LatLng(lat, long);
 
             const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";

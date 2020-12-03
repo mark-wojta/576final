@@ -89,29 +89,40 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         String month = date.split("-")[1];
         String day = date.split("-")[2];
         String time = request.getParameter("time");
-        String injuries = request.getParameter("injur");
-        String fatalities = request.getParameter("fatal");
+        String injuries = request.getParameter("injuries");
+        String fatalities = request.getParameter("fatalities");
         String prop_loss = request.getParameter("prop_loss");
         String crop_loss = request.getParameter("crop_loss");
-        String county = request.getParameter("county");
+        String lon = request.getParameter("lon");
+        String lat = request.getParameter("lat");
+        if (injuries != null) {injuries = "'" + injuries + "'";}
+        if (fatalities != null) {fatalities = "'" + fatalities + "'";}
+        if (prop_loss != null) {prop_loss = "'" + prop_loss + "'";}
+        if (crop_loss != null) {crop_loss = "'" + crop_loss + "'";}
 
-//        // 4. create specific report
-//        if (is_tornado != null) {
-//            sql = "insert into \"Tornado\" (year, month, day, date, time, magnitude, injuries, fatalities, prop_loss, crop_loss, lat, lon, county) values ('"
-//                    + year + "'," + month + "'," + day + "'," + date + "'," + time + "'," + magnitude + injuries + "'," + fatalities + "'," + prop_loss + "'," + crop_loss + "'," + lat + "'," + lon + "'," + county + ")";
-//            System.out.println("Success! Tornado event created.");
-//        } else if (is_hail != null) {
-//            sql = "insert into \"Hail\" (report_id, resource_type) values ('"
-//                    + report_id + "'," + add_msg + ")";
-//            System.out.println("Success! Hail event created.");
-//        } else if (is_wind != null) {
-//            sql = "insert into \"Wind\" (report_id, damage_type) values ('"
-//                    + report_id + "'," + add_msg + ")";
-//            System.out.println("Success! Wind event created.");
-//        } else {
-//            return;
-//        }
-//        dbutil.modifyDB(sql);
+        // 4. create specific report
+        if (is_tornado != null) {
+            sql = "insert into \"Tornado\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
+                    " prop_loss, crop_loss, start_lat, start_lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
+                    ")', 4326)" + "," + year + "," + month + "," + day + "," + date + "," + time + "," + magnitude + "," +
+                    injuries + "," + fatalities + "," + prop_loss + "," + crop_loss + "," + lat + "," + lon + ")";
+            System.out.println("Success! Tornado event created.");
+        } else if (is_hail != null) {
+            sql = "insert into \"Hail\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
+                    " prop_loss, crop_loss, lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
+                    ")', 4326)" + "," + year + "," + month + "," + day + "," + date + "," + time + "," + magnitude + "," +
+                    injuries + "," + fatalities + "," + prop_loss + "," + crop_loss + "," + lat + "," + lon + ")";
+            System.out.println("Success! Hail event created.");
+        } else if (is_wind != null) {
+            sql = "insert into \"Wind\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
+                    " prop_loss, crop_loss, lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
+                    ")', 4326)" + "," + year + "," + month + "," + day + "," + date + "," + time + "," + magnitude + "," +
+                    injuries + "," + fatalities + "," + prop_loss + "," + crop_loss + "," + lat + "," + lon + ")";
+            System.out.println("Success! Wind event created.");
+        } else {
+            return;
+        }
+        dbutil.modifyDB(sql);
 
         // response that the report submission is successful
         JSONObject data = new JSONObject();
@@ -220,7 +231,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         // hail event
         if (event_type.equalsIgnoreCase("is_hail")) {
             System.out.println("HttpServlet: starting hail");
-            String sql = "select prop_loss, date, crop_loss, county, magnitude, injuries, ST_X(geom) as longitude, ST_Y(geom) as latitude from \"Hail\"";
+            String sql = "select prop_loss, date, crop_loss, county, magnitude, injuries, ST_X(geom) as lon, ST_Y(geom) as lat from \"Hail\"";
             if (magnitude !=null && magnitude.equals("0-1")){
                 sql += " where magnitude between 0.0 and 1.0";
             }
@@ -288,7 +299,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 
         // wind event
         if (event_type.equalsIgnoreCase("is_wind")) {
-            String sql = "select prop_loss, crop_loss, date, injuries, magnitude, fatalities, county, ST_X(geom) as longitude, ST_Y(geom) as latitude from \"Wind\"";
+            String sql = "select prop_loss, crop_loss, date, injuries, magnitude, fatalities, county, ST_X(geom) as lon, ST_Y(geom) as lat from \"Wind\"";
             if (magnitude !=null && magnitude.equals("0-25 mph")){
                 sql += " where magnitude between 0 and 25";
             }
@@ -381,16 +392,16 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
             }
             if (event_type.equalsIgnoreCase("hail")) {
                 m.put("event_type", event_type);
-                m.put("longitude", res.getString("longitude"));
-                m.put("latitude", res.getString("latitude"));
+                m.put("lon", res.getString("lon"));
+                m.put("lat", res.getString("lat"));
                 m.put("county", res.getString("county"));
                 m.put("prop_loss", res.getString("prop_loss"));
                 m.put("crop_loss", res.getString("crop_loss"));
             }
             if (event_type.equalsIgnoreCase("wind")) {
                 m.put("event_type", event_type);
-                m.put("longitude", res.getString("longitude"));
-                m.put("latitude", res.getString("latitude"));
+                m.put("lon", res.getString("lon"));
+                m.put("lat", res.getString("lat"));
                 m.put("fatalities", res.getString("fatalities"));
                 m.put("county", res.getString("county"));
                 m.put("prop_loss", res.getString("prop_loss"));
