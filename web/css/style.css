@@ -2,6 +2,21 @@ html,body{
     background: #0A2390;
 }
 
+form#create_event_form h3 {
+    color:#fff;
+    font-weight: bold;
+}
+
+form#create_event_form h4 {
+    color:#fff;
+    font-weight: bold;
+}
+
+form#create_event_form h5 {
+    color:#fff;
+    font-weight: bold;
+}
+
 form#query_report_form h3 {
     color: #fff;
     font-weight: bold;
@@ -57,6 +72,10 @@ body {
     overflow: hidden;
 }
 
+hr {
+    color:#BABABA;
+}
+
 .sidebar {
     padding: 12px;
     background: #0A2390;
@@ -65,6 +84,23 @@ body {
 form {
     padding-top: 12px;
     background: #0A2390;
+}
+.form-control {
+    margin: 5px;
+}
+
+.severity {
+    margin-bottom: 30px;
+}
+
+select.length_select {
+    margin-bottom: 30px;
+}
+
+label.control-label {
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-right: 2px;
 }
 
 label {

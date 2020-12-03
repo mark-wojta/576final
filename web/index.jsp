@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-  <title>Web Project</title>
+  <title>Wisconsin Severe Storm Events</title>
 
   <!-- Custom styles -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -44,38 +44,75 @@
         <!-- Create Report Tab Panel -->
         <div class="tab-pane" id="create_event" role="tabpanel">
           <form id = "create_event_form">
-            <div><label>Select a disaster event type: </label>
-              <select onchange="onSelectReportType(this)" name="report_type">
-                <option value="">Choose the event type</option>
+            <div class="form-group">
+              <h3 style="color:white;">Submit a Report</h3>
+              <p>Use the form below to submit a Severe Weather Report. Report hail size, wind speed, tornadoes,
+              storm severity, injuries, and fatalities. If a value is unknown, leave the category blank.</p>
+              <p>The National Weather Service defines a severe weather event as a storm producing quarter sized (1 inch)
+                or larger hail, wind speeds greater than 58 mph, tornadoes, or damage to trees and property.</p>
+              <hr>
+              <h3 style="color:white;">Event Type</h3>
+              <select class="form-control" onchange="onSelectReportType(this)" name="report_type">
+                <option value="">Choose the Event Type</option>
                 <option value="is_tornado">Tornado</option>
                 <option value="is_hail">Hail</option>
                 <option value="is_wind">Wind</option>
               </select>
             </div>
-            <hr weight>
-            <div><label>Fatalities:&nbsp</label><input placeholder="Number of fatalities" name="fatalities"></div>
-            <div><label>Injuries:&nbsp</label><input placeholder="Number of injuries" name="injuries"></div>
-            <div><label>Date:&nbsp</label><input placeholder="YYYY-MM-DD" name="date"></div>
-            <div><label>Time:&nbsp</label><input placeholder="HH:MM:SS" name="time"></div>
+            <hr>
+            <h3 style="color:white;">Severe Event Details</h3>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Fatalities:&nbsp</label>
+              <div class="col-sm-9">
+                <input class="form-control" placeholder="Number of Fatalities" name="fatalities">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Injuries:&nbsp</label>
+              <div class="col-sm-9">
+                <input class="form-control" placeholder="Number of injuries" name="injuries">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Date:&nbsp</label>
+              <div class="col-sm-9">
+                <input class="form-control" placeholder="YYYY-MM-DD" name="date">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Time:&nbsp</label>
+              <div class="col-sm-9">
+                <input class="form-control" placeholder="HH:MM:SS" name="time">
+              </div>
+            </div>
 <%--            <div class="additional_msg_div" style="visibility: hidden"><label class="additional_msg"></label>--%>
 <%--              <select class="additional_msg_select" name="additional_message"></select>--%>
 <%--            </div>--%>
-            <div><label class="mag">Magnitude:</label>
-              <select class="mag_select" name="magnitude">
-                <option value="">Magnitude</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+            <div class="form-group">
+              <label class="control-label col-sm-3 mag">Magnitude:</label>
+              <div class="col-sm-9">
+                <select class="form-control mag_select" name="magnitude">
+                  <option value="">Magnitude</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
             </div>
-            <div><label>Address:</label>
-              <input id="autocomplete" placeholder="Address" >
+            <div class="form-group">
+              <label class="control-label col-sm-3">Address:</label>
+              <div class="col-sm-9">
+                <input class="form-control" id="autocomplete" placeholder="Address" >
+              </div>
             </div>
-            <button type="submit" class="btn btn-default" id="report_submit_btn">
-              <span class="glyphicon glyphicon-star"></span> Submit
-            </button>
+            <br>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-default" id="report_submit_btn" style="margin-top:20px;">Submit Report</button>
+              </div>
+            </div>
           </form>
         </div>
 
@@ -176,49 +213,61 @@
               </select>
             </div>
             <hr>
-            <div class="form-group">
-              <h3 class="mag">Storm Severity</h3>
-                <label style="font-style: italic">Magnitude:</label>
-                <select class="form-control mag_select" id="mag_select" name="magnitude">
-                  <option value="">Magnitude</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-            </div>
-            <div class="form-group">
-              <div class="fatal_div" style="visibility: hidden">
-                <label class="fatalities" style="font-style: italic"></label>
-                  <select class="form-control fatal_select" id="fatal_select" name="fatalities"></select>
+            <div class="severity">
+              <div class="form-group">
+                <h3 class="mag">Storm Severity</h3>
+                  <label class="control-label col-sm-3" style="font-style: italic">Magnitude:</label>
+                  <div class="col-sm-9">
+                    <select class="form-control mag_select" id="mag_select" name="magnitude">
+                      <option value="">Magnitude</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="form-group">
+                <div class="fatal_div" style="visibility: hidden">
+                  <label class="control-label col-sm-3 fatalities" style="font-style: italic"></label>
+                  <div class="col-sm-9">
+                    <select class="form-control fatal_select" id="fatal_select" name="fatalities"></select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3 injuries" style="font-style: italic">Injuries:</label>
+                <div class="col-sm-9">
+                  <select class="form-control inj_select" name="injuries">
+                    <option value="">Injuries</option>
+                    <option value="0-5">0-5</option>
+                    <option value="6-10">6-10</option>
+                    <option value="11-20">11-20</option>
+                    <option value="21-50">21-50</option>
+                    <option value="> 50">Over 50</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group length_div" style="visibility: hidden">
+                <label class="control-label col-sm-3 length" style="font-style: italic"></label>
+                <div class="col-sm-9">
+                  <select class="form-control length_select" name="length"></select>
+                </div>
               </div>
             </div>
             <div class="form-group">
-              <label class="injuries" style="font-style: italic">Injuries:</label>
-              <select class="form-control inj_select" name="injuries">
-                <option value="">Injuries</option>
-                <option value="0-5">0-5</option>
-                <option value="6-10">6-10</option>
-                <option value="11-20">11-20</option>
-                <option value="21-50">21-50</option>
-                <option value="> 50">Over 50</option>
-              </select>
+              <hr>
+              <h3 style="padding-top: 20px;">Search by Event Date</h3>
+              <p>
+                <label for="date">Filter by year:</label>
+                <input type="text" id="date" name="date" readonly style="border:0; color:#ffffff; font-weight:bold;">
+              </p>
             </div>
-            <div class="form-group length_div" style="visibility: hidden">
-              <label class="length" style="font-style: italic"></label>
-              <select class="form-control length_select" name="length"></select>
-            </div>
-            <hr>
-            <h3>Search by Event Date</h3>
-            <br>
-              <label for="date">Filter by year:</label>
-              <input type="text" id="date" name="date" readonly style="border:0; color:#ffffff; font-weight:bold;">
-            </p>
-            <div id="slider-range"></div>
+            <div class="form-group" id="slider-range"></div>
             <p>
-              <label for="month">Filter by month:</label>
-              <input type="text" id="month" name="month" readonly style="border:0; color:#ffffff; font-weight:bold;">
+             <label for="month">Filter by month:</label>
+             <input type="text" id="month" name="month" readonly style="border:0; color:#ffffff; font-weight:bold;">
             </p>
             <div id="slider-range-month"></div>
             <hr>
@@ -244,6 +293,7 @@
               <li><a href="https://www.spc.noaa.gov/gis/svrgis/">National Oceanic and Atmospheric Administration (Source Data and More National Weather Data)</a></li>
               <li><a href="https://search.library.wisc.edu/search/digital?q=tornadoes">University of Wisconsin-Madison Libraries (Archived Wisconsin Tornado Imagery)</a></li>
             </ul>
+            <p><small>Map designed and created by Abby Gleason, Mark Wojta, and Kerry Hanko</small></p>
           </form>
         </div>
       </div>
