@@ -57,7 +57,6 @@ function onSelectReportType(ele){
             $(form).find(".length_div").css("visibility", "visible");
             break;
         case "is_hail":
-            $(form).find(".fatal_div").css("visibility", "visible");
             select.find('option').remove();
             select.append($("<option></option>")
                 .attr("value","")
@@ -67,6 +66,17 @@ function onSelectReportType(ele){
             $.each(selectValues, function(index,value) {
                 select.append($("<option></option>")
                     .attr("value",value)
+                    .text(value));
+            });
+            fatal_label.text("Fatalities:");
+            fatal_select.find('option').remove();
+            fatal_select.append($("<option></option>")
+                .attr("value", "")
+                .text("Fatalities"));
+            fatalselectValues = ['0', '1', '2'];
+            $.each(fatalselectValues, function (index, value) {
+                fatal_select.append($("<option></option>")
+                    .attr("value", value)
                     .text(value));
             });
             inj_select.find('option').remove();
@@ -79,7 +89,7 @@ function onSelectReportType(ele){
                     .attr("value", value)
                     .text(value));
             });
-            $(form).find(".fatal_div").css("visibility", "hidden");
+            $(form).find(".fatal_div").css("visibility", "visible");
             $(form).find(".length_div").css("visibility", "hidden");
             break;
         case "is_wind":
@@ -130,9 +140,8 @@ function createReport(event) {
     event.preventDefault(); // stop form from submitting normally
 
     var a = $("#create_report_form").serializeArray();
-    var timestamp = new Date().getTime();
-    a.push({ name: "tab_id", value: "0" }, { name: "longitude", value: place.geometry.location.lng() },
-        { name: "latitude", value: place.geometry.location.lat() }, { name: "time_stamp", value: timestamp });
+    a.push({ name: "tab_id", value: "0" }, { name: "lon", value: place.geometry.location.lng() },
+        { name: "lat", value: place.geometry.location.lat() });
 
     $.ajax({
         url: 'HttpServlet',

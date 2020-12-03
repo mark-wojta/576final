@@ -19,7 +19,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <!-- Google Map js libraries -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2PuNWeVXTLl_3jEee5Y0dy0YWgrUw6Bs&libraries=geometry,places" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi4AhR1NvdOFDiotj-_XmElmzDcVhvH5U&libraries=geometry,places" type="text/javascript"></script>
 
 </head>
 
@@ -55,7 +55,8 @@
             <hr weight>
             <div><label>Fatalities:&nbsp</label><input placeholder="Number of fatalities" name="fatalities"></div>
             <div><label>Injuries:&nbsp</label><input placeholder="Number of injuries" name="injuries"></div>
-            <div><label>Date:&nbsp</label><input placeholder="year-month-day" name="date"></div>
+            <div><label>Date:&nbsp</label><input placeholder="YYYY-MM-DD" name="date"></div>
+            <div><label>Time:&nbsp</label><input placeholder="HH:MM:SS" name="time"></div>
 <%--            <div class="additional_msg_div" style="visibility: hidden"><label class="additional_msg"></label>--%>
 <%--              <select class="additional_msg_select" name="additional_message"></select>--%>
 <%--            </div>--%>
