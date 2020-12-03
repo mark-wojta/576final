@@ -39,7 +39,7 @@ form#more_info_form ul li a:hover {
 }
 
 ::marker {
-    color: #ffffff;
+    color: #2d3337;
     background: #ffffff;
 }
 
@@ -48,8 +48,13 @@ p {
     font-size: 100%;
 }
 
+b{
+  color: #2d3337;
+}
+
 body {
     padding-top: 50px;
+    overflow: hidden;
 }
 
 .sidebar {
@@ -69,6 +74,7 @@ label {
 #map-canvas {
     height:100%;
     position: absolute;
+    overflow-y: scroll !important;
     right:0;
 }
 
@@ -123,4 +129,12 @@ nav.navbar.navbar-inverse.navbar-fixed-top a:hover {
 #month{
     background-color: #0A2390;
     outline: none;
+}
+
+.col-xs-3{
+    height: 94vh;
+    overflow-y: scroll !important;
+    top: 0;
+    bottom: 0;
+    /*height: 95vh;*/
 }

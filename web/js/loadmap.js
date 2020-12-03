@@ -217,7 +217,7 @@ function mapInitialization(reports) {
 
     $.each(reports, function(i, e) {
         // Create the infoWindow content
-        var contentStr = '<h4>'+ e['event_type'] + '</h4><hr>';
+        var contentStr = '<h4>'+ e['event_type'][0].toUpperCase() + e['event_type'].slice(1) + '</h4><hr>';
         contentStr += '<p><b>' + 'Magnitude' + ':</b>&nbsp' + e['magnitude'] + '</p>';
         contentStr += '<p><b>' + 'County' + ':</b>&nbsp' + e['county'] +
             '</p>';
