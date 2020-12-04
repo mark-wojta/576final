@@ -73,9 +73,9 @@ public class DBUtility {
         // util.modifyDB("insert into report (first_name, last_name) values ('test_user_1_fN', 'test_user_1_lN')");
 
         // 2. query the database
-        ResultSet res = util.queryDB("select * from \"Tornado\"");
+        ResultSet res = util.queryDB("select \"Counties\".county_nam from \"Counties\"");
         while (res.next()) {
-            System.out.println(res.getString("magnitude"));
+            System.out.println(res.getString("county_nam"));
         }
 
     }

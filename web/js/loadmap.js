@@ -219,8 +219,6 @@ function mapInitialization(reports) {
         // Create the infoWindow content
         var contentStr = '<h4>'+ e['event_type'][0].toUpperCase() + e['event_type'].slice(1) + '</h4><hr>';
         contentStr += '<p><b>' + 'Magnitude' + ':</b>&nbsp' + e['magnitude'] + '</p>';
-        contentStr += '<p><b>' + 'County' + ':</b>&nbsp' + e['county'] +
-            '</p>';
         contentStr += '<p><b>' + 'Injuries' + ':</b>&nbsp' + e['injuries'] +
             '</p>';
         contentStr += '<p><b>' + 'Date' + ':</b>&nbsp' + e['date'] +
@@ -239,6 +237,9 @@ function mapInitialization(reports) {
         }
 
         if (e['event_type'] == "hail" || e['event_type'] == "wind"){
+            contentStr += '<p><b>' + 'County' + ':</b>&nbsp' + e['county'] +
+                '</p>';
+
             var long = Number(e['lon']);
             var lat = Number(e['lat']);
             var latlng = new google.maps.LatLng(lat, long);
@@ -280,6 +281,9 @@ function mapInitialization(reports) {
             bounds.extend(latlng);
         }
         else if (e['event_type'] == "tornado"){
+            contentStr += '<p><b>' + 'County' + ':</b>&nbsp' + e['county_nam'] +
+                '</p>';
+
             const tornadoCoordinates = [
                 { lat: Number(e['start_lat']), lng: Number(e['start_lon']) },
                 { lat: Number(e['end_lat']), lng: Number(e['end_lon']) },

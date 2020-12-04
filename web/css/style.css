@@ -59,7 +59,7 @@ form#more_info_form ul li a:hover {
 }
 
 p {
-    color: #ffffff;
+    color: #2d3337;
     font-size: 100%;
 }
 
@@ -173,4 +173,16 @@ nav.navbar.navbar-inverse.navbar-fixed-top a:hover {
     top: 0;
     bottom: 0;
     /*height: 95vh;*/
+}
+
+#create_event_form p{
+    color: #ffffff;
+}
+
+#query_report_form p{
+    color: #ffffff;
+}
+
+#more_info_form p{
+    color: #ffffff;
 }

@@ -165,7 +165,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 
         if (event_type == null){
             event_type = "Tornado";
-            String sql = "select \"Tornado\".prop_loss, \"Tornado\".date, \"Tornado\".crop_loss, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
+            String sql = "select \"Tornado\".prop_loss, \"Tornado\".date, \"Tornado\".crop_loss, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon, \"Counties\".county_nam from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
             queryReportHelper(sql,list,"tornado");
         }
 
@@ -173,7 +173,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         if (event_type.equalsIgnoreCase("is_tornado")) {
             System.out.println("HttpServlet: starting tornado");
             String sql;
-            sql = "select \"Tornado\".prop_loss, \"Tornado\".crop_loss, \"Tornado\".date, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
+            sql = "select \"Tornado\".prop_loss, \"Tornado\".crop_loss, \"Tornado\".date, \"Tornado\".length, \"Tornado\".magnitude, \"Tornado\".fatalities, \"Tornado\".injuries, \"Tornado\".start_lat, \"Tornado\".start_lon, \"Tornado\".end_lat, \"Tornado\".end_lon, \"Counties\".county_nam from \"Tornado\", \"Counties\" where ST_intersects (ST_Transform(\"Tornado\".geom::geometry, 3071), \"Counties\".geom::geometry)";
             if (county !=null) {
                 sql += " and county_nam = '" + county + "'";
             }
@@ -381,7 +381,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
             if (event_type.equalsIgnoreCase("tornado")) {
                 m.put("event_type", event_type);
                 m.put("length", res.getString("length"));
-//                m.put("county", res.getString("county_nam"));
+                m.put("county_nam", res.getString("county_nam"));
                 m.put("fatalities", res.getString("fatalities"));
                 m.put("start_lat", res.getString("start_lat"));
                 m.put("start_lon", res.getString("start_lon"));
@@ -403,7 +403,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
                 m.put("lon", res.getString("lon"));
                 m.put("lat", res.getString("lat"));
                 m.put("fatalities", res.getString("fatalities"));
-                m.put("county", res.getString("county"));
+                m.put("county", res.getString("county_nam"));
                 m.put("prop_loss", res.getString("prop_loss"));
                 m.put("crop_loss", res.getString("crop_loss"));
             }
