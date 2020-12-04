@@ -34,8 +34,8 @@
 
       <!-- Tab Navis-->
       <ul class="nav nav-pills red" id="pills-tab" role="tablist">
-        <li class="active"><a href="#create_event" data-toggle="tab">Report Event</a></li>
-        <li><a href="#query_report" data-toggle="tab">Query Event</a></li>
+        <li><a href="#create_event" data-toggle="tab">Report Event</a></li>
+        <li class="active"><a href="#query_report" data-toggle="tab">Query Event</a></li>
         <li><a href="#more_report" data-toggle="tab">More</a></li>
       </ul>
 
@@ -110,7 +110,7 @@
         </div>
 
         <!-- Query Report Tab Panel -->
-        <div class="tab-pane" id="query_report" role="tabpanel">
+        <div class="tab-pane active" id="query_report" role="tabpanel">
           <form id = "query_report_form">
             <div class="form-group">
               <h3>Search Tools</h3>

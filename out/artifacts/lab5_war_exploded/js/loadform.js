@@ -200,8 +200,8 @@ function dateSlider(){
         $( "#slider-range" ).slider({
             range: true,
             min: 1950,
-            max: 2018,
-            values: [ 1950, 2018 ],
+            max: 2020,
+            values: [ 1950, 2020 ],
             slide: function( event, ui ) {
                 $( "#date" ).val( ui.values[ 0 ] + "-" + ui.values[ 1 ] );
             }

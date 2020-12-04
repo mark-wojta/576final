@@ -137,7 +137,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         String magnitude = request.getParameter("magnitude");
         String date = request.getParameter("date");
         if (date == null){
-            date = "1950-2018";
+            date = "1950-2020";
         }
         System.out.println("Date:" + date);
         String startYear = date.split("-")[0];
@@ -396,7 +396,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
                 m.put("lon", res.getString("lon"));
                 m.put("lat", res.getString("lat"));
                 m.put("fatalities", res.getString("fatalities"));
-                m.put("county", res.getString("county_nam"));
+                m.put("county", res.getString("county"));
                 m.put("prop_loss", res.getString("prop_loss"));
                 m.put("crop_loss", res.getString("crop_loss"));
             }
