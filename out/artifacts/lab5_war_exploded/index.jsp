@@ -89,16 +89,9 @@
 <%--              <select class="additional_msg_select" name="additional_message"></select>--%>
 <%--            </div>--%>
             <div class="form-group">
-              <label class="control-label col-sm-3 mag">Magnitude:</label>
+              <label class="control-label col-sm-3">Magnitude:&nbsp</label>
               <div class="col-sm-9">
-                <select class="form-control mag_select" name="magnitude">
-                  <option value="">Magnitude</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
+                <input class="form-control" placeholder="Magnitude Number" name="magnitude1">
               </div>
             </div>
             <div class="form-group">

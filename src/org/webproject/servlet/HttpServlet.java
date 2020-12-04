@@ -79,11 +79,8 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 
         System.out.println("HttpServlet: starting createReport()");
 
-        String is_tornado = request.getParameter("is_tornado");
-        String is_hail = request.getParameter("is_hail");
-        String is_wind = request.getParameter("is_wind");
-
-        String magnitude = request.getParameter("magnitude");
+        String report_type = request.getParameter("report_type");
+        String magnitude = request.getParameter("magnitude1");
         String date = request.getParameter("date");
         String year = date.split("-")[0];
         String month = date.split("-")[1];
@@ -91,33 +88,29 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         String time = request.getParameter("time");
         String injuries = request.getParameter("injuries");
         String fatalities = request.getParameter("fatalities");
-        String prop_loss = request.getParameter("prop_loss");
-        String crop_loss = request.getParameter("crop_loss");
         String lon = request.getParameter("lon");
         String lat = request.getParameter("lat");
-        if (injuries != null) {injuries = "'" + injuries + "'";}
-        if (fatalities != null) {fatalities = "'" + fatalities + "'";}
-        if (prop_loss != null) {prop_loss = "'" + prop_loss + "'";}
-        if (crop_loss != null) {crop_loss = "'" + crop_loss + "'";}
+        System.out.println(report_type + "," + magnitude + "," + date + "," + year + "," + month + "," + day + "," + time + "," + injuries + "," + fatalities + "," + lon + "," + lat);
+
+
 
         // 4. create specific report
-        if (is_tornado != null) {
-            sql = "insert into \"Tornado\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
-                    " prop_loss, crop_loss, start_lat, start_lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
-                    ")', 4326)" + "," + year + "," + month + "," + day + "," + date + "," + time + "," + magnitude + "," +
-                    injuries + "," + fatalities + "," + prop_loss + "," + crop_loss + "," + lat + "," + lon + ")";
+        if (report_type.equals("is_tornado")) {
+            sql = "insert into \"Tornado\" (year, month, day, date, time, magnitude, injuries, fatalities," +
+                    " start_lat, start_lon) values ('" + year + "','" + month + "','" + day + "','" + date + "','"
+                    + time + "','" + magnitude + "','" + injuries + "','" + fatalities + "','" + lat + "','" + lon + "')";
             System.out.println("Success! Tornado event created.");
-        } else if (is_hail != null) {
+        } else if (report_type.equals("is_hail")) {
             sql = "insert into \"Hail\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
-                    " prop_loss, crop_loss, lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
-                    ")', 4326)" + "," + year + "," + month + "," + day + "," + date + "," + time + "," + magnitude + "," +
-                    injuries + "," + fatalities + "," + prop_loss + "," + crop_loss + "," + lat + "," + lon + ")";
+                    " lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
+                    ")', 4326)" + ",'" + year + "','" + month + "','" + day + "','" + date + "','" + time + "','" + magnitude + "','" +
+                    injuries + "','" + fatalities + "','" + lat + "','" + lon + "')";
             System.out.println("Success! Hail event created.");
-        } else if (is_wind != null) {
+        } else if (report_type.equals("is_wind")) {
             sql = "insert into \"Wind\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
-                    " prop_loss, crop_loss, lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
-                    ")', 4326)" + "," + year + "," + month + "," + day + "," + date + "," + time + "," + magnitude + "," +
-                    injuries + "," + fatalities + "," + prop_loss + "," + crop_loss + "," + lat + "," + lon + ")";
+                    " lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
+                    ")', 4326)" + ",'" + year + "','" + month + "','" + day + "','" + date + "','" + time + "','" + magnitude + "','" +
+                    injuries + "','" + fatalities + "','" + lat + "','" + lon + "')";
             System.out.println("Success! Wind event created.");
         } else {
             return;

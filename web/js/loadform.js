@@ -139,7 +139,7 @@ function onSelectReportType(ele){
 function createReport(event) {
     event.preventDefault(); // stop form from submitting normally
 
-    var a = $("#create_report_form").serializeArray();
+    var a = $("#create_event_form").serializeArray();
     a.push({ name: "tab_id", value: "0" }, { name: "lon", value: place.geometry.location.lng() },
         { name: "lat", value: place.geometry.location.lat() });
 
@@ -172,9 +172,7 @@ function createReport(event) {
 
     });
 
-    $(".additional_msg_div").css("visibility", "hidden");
-    document.getElementById("create_report_form").reset();
-
+    document.getElementById("create_event_form").reset();
 
 }
 
@@ -226,7 +224,6 @@ function dateSlider(){
     } );
 }
 
-
-$("#create_report_form").on("submit",createReport);
+$("#create_event_form").on("submit",createReport);
 $("#query_report_form").on("submit",queryReport);
 $(window).on("load", dateSlider);
