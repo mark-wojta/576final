@@ -270,10 +270,9 @@ function mapInitialization(reports) {
         if (e['prop_loss'] == 9){
             contentStr += '<p><b>Property Loss:</b> > $500 million' + '</p>';
         }
-        else {
+        if (e['prop_loss'] == 0) {
             contentStr += '<p><b>Property Loss:</b> Unknown' + '</p>';
         }
-
         if (e['event_type'] == 'tornado') {
             contentStr += '<p><b>' + 'length' + ':</b>&nbsp' +
                 e['length'] + ' miles</p>';
