@@ -233,10 +233,8 @@ function mapInitialization(reports) {
             '</p>';
         contentStr += '<p><b>' + 'Date' + ':</b>&nbsp' + e['date'] +
             '</p>';
-        if (e['event_type'] != 'hail'){
-            contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +
+        contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +
                 '</p>';
-        }
         if (e['crop_loss'] == 0) {
             contentStr += '<p><b>' + 'Crop Loss' + ':</b> Unknown</p>';
         } else {
@@ -370,7 +368,7 @@ function mapInitialization(reports) {
         map.fitBounds (bounds);
     }
    else{
-       console.log("No events returned");
+       alert("No matching records found.  Please refine your query and try again.");
     }
 
 }
