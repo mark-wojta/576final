@@ -226,7 +226,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         // hail event
         if (event_type.equalsIgnoreCase("is_hail")) {
             System.out.println("HttpServlet: starting hail");
-            String sql = "select prop_loss, date, crop_loss, county, magnitude, injuries, ST_X(geom) as lon, ST_Y(geom) as lat from \"Hail\"";
+            String sql = "select prop_loss, date, crop_loss, county, fatalities, magnitude, injuries, ST_X(geom) as lon, ST_Y(geom) as lat from \"Hail\"";
             if (magnitude !=null && magnitude.equals("0-1")){
                 sql += " where magnitude between 0.0 and 1.0";
             }
@@ -270,6 +270,14 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
                 }
                 else{
                     sql += " and injuries = " + injuries;
+                }
+            }
+            if (fatalities !=null){
+                if (sql.endsWith("\"Hail\"")) {
+                    sql += " where fatalities = " + fatalities;
+                }
+                else{
+                    sql += " and fatalities = " + fatalities;
                 }
             }
             if (startYear != null && endYear != null){
@@ -389,6 +397,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
                 m.put("event_type", event_type);
                 m.put("lon", res.getString("lon"));
                 m.put("lat", res.getString("lat"));
+                m.put("fatalities", res.getString("fatalities"));
                 m.put("county", res.getString("county"));
                 m.put("prop_loss", res.getString("prop_loss"));
                 m.put("crop_loss", res.getString("crop_loss"));

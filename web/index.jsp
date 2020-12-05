@@ -62,26 +62,26 @@
             <hr>
             <h3 style="color:white;">Severe Event Details</h3>
             <div class="form-group">
-              <label class="control-label col-sm-3">Fatalities:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Fatalities:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="Number of Fatalities" name="fatalities">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Injuries:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Injuries:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="Number of injuries" name="injuries">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Date:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Date:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="YYYY-MM-DD" name="date">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Time:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Time:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="HH:MM:SS" name="time">
               </div>
             </div>
@@ -89,32 +89,14 @@
 <%--              <select class="additional_msg_select" name="additional_message"></select>--%>
 <%--            </div>--%>
             <div class="form-group">
-              <label class="control-label col-sm-3">Magnitude:&nbsp</label>
-              <div class="col-sm-7" id="change1">
-                <input class="form-control" placeholder="Input EF Scale Rating" id="mag_select1" name="magnitude1">
-              </div>
-              <div class="col-sm-2">
-                <button type="button" class="button button5" id="btnPopover" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Determining Tornado EF Scale Rating">
-                  <a class="hyperlink color" href="https://www.weather.gov/oun/efscale" target="_blank"><i class="glyphicon glyphicon-info-sign"></i></a>
-                </button>
-              </div>
-            </div>
-            <br>
-            <div class="form-group">
-              <label class="control-label col-sm-3" id="change2">Property Loss:&nbsp</label>
-              <div class="col-sm-9" id="change3">
-                <input class="form-control" placeholder="Estimated Dollar Value (millions)" name="prop_loss">
+              <label class="control-label col-sm-4">Magnitude: </label>
+              <div class="col-sm-8">
+                <input class="form-control" placeholder="Magnitude Number" name="magnitude1">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Crop Loss:&nbsp</label>
-              <div class="col-sm-9">
-                <input class="form-control" placeholder="Estimated Dollar Value (millions)" name="crop_loss">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-3">Address:</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Address:</label>
+              <div class="col-sm-8">
                 <input class="form-control" id="autocomplete" placeholder="Address" >
               </div>
             </div>
@@ -302,7 +284,6 @@
             <h5>Links:</h5>
             <ul>
               <li><a href="https://www.spc.noaa.gov/gis/svrgis/">National Oceanic and Atmospheric Administration (Source Data and More National Weather Data)</a></li>
-              <br>
               <li><a href="https://search.library.wisc.edu/search/digital?q=tornadoes">University of Wisconsin-Madison Libraries (Archived Wisconsin Tornado Imagery)</a></li>
             </ul>
             <p><small>Map designed and created by Abby Gleason, Mark Wojta, and Kerry Hanko</small></p>
@@ -316,9 +297,6 @@
   </div>
 </div>
 
-<script type="text/javascript">
-
-</script>
 <script src="js/loadform.js"></script>
 <script src="js/loadmap.js"></script>
 
