@@ -186,3 +186,36 @@ nav.navbar.navbar-inverse.navbar-fixed-top a:hover {
 #more_info_form p{
     color: #ffffff;
 }
+
+.button {
+    background-color: #0A2390;
+    border: none;
+    color: #ffffff;
+    padding: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+}
+
+.button5 {border-radius: 50%;
+}
+
+i.glyphicon.glyphicon-info-sign {font-size: 150%;
+    color: #ffffff;
+}
+
+i.glyphicon.glyphicon-info-sign:hover {color: #ef2929;
+}
+
+div.popover-content {
+    background-color: #2d3337;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+h3.popover-title {
+    background-color: #0A2390;
+    color: #ffffff;
+    font-weight: bold;
+}

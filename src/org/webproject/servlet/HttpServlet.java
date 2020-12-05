@@ -88,6 +88,8 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
         String time = request.getParameter("time");
         String injuries = request.getParameter("injuries");
         String fatalities = request.getParameter("fatalities");
+        String prop_loss = request.getParameter("prop_loss");
+        String crop_loss = request.getParameter("crop_loss");
         String lon = request.getParameter("lon");
         String lat = request.getParameter("lat");
         System.out.println(report_type + "," + magnitude + "," + date + "," + year + "," + month + "," + day + "," + time + "," + injuries + "," + fatalities + "," + lon + "," + lat);
@@ -96,21 +98,21 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 
         // 4. create specific report
         if (report_type.equals("is_tornado")) {
-            sql = "insert into \"Tornado\" (year, month, day, date, time, magnitude, injuries, fatalities," +
+            sql = "insert into \"Tornado\" (year, month, day, date, time, magnitude, injuries, fatalities, prop_loss, crop_loss," +
                     " start_lat, start_lon) values ('" + year + "','" + month + "','" + day + "','" + date + "','"
-                    + time + "','" + magnitude + "','" + injuries + "','" + fatalities + "','" + lat + "','" + lon + "')";
+                    + time + "','" + magnitude + "','" + injuries + "','" + fatalities + "','" + prop_loss + "','" + crop_loss + "','" + lat + "','" + lon + "')";
             System.out.println("Success! Tornado event created.");
         } else if (report_type.equals("is_hail")) {
-            sql = "insert into \"Hail\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
+            sql = "insert into \"Hail\" (geom, year, month, day, date, time, magnitude, injuries, fatalities, prop_loss, crop_loss," +
                     " lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
                     ")', 4326)" + ",'" + year + "','" + month + "','" + day + "','" + date + "','" + time + "','" + magnitude + "','" +
-                    injuries + "','" + fatalities + "','" + lat + "','" + lon + "')";
+                    injuries + "','" + fatalities + "','" + prop_loss + "','" + crop_loss + "','" + lat + "','" + lon + "')";
             System.out.println("Success! Hail event created.");
         } else if (report_type.equals("is_wind")) {
-            sql = "insert into \"Wind\" (geom, year, month, day, date, time, magnitude, injuries, fatalities," +
+            sql = "insert into \"Wind\" (geom, year, month, day, date, time, magnitude, injuries, fatalities, prop_loss, crop_loss," +
                     " lat, lon) values (" + "ST_GeomFromText('POINT(" + lon + " " + lat +
                     ")', 4326)" + ",'" + year + "','" + month + "','" + day + "','" + date + "','" + time + "','" + magnitude + "','" +
-                    injuries + "','" + fatalities + "','" + lat + "','" + lon + "')";
+                    injuries + "','" + fatalities + "','" + prop_loss + "','" + crop_loss + "','" + lat + "','" + lon + "')";
             System.out.println("Success! Wind event created.");
         } else {
             return;

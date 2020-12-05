@@ -53,6 +53,8 @@ function onSelectReportType(ele){
                     .attr("value", value)
                     .text(value));
             });
+            document.getElementsByName('magnitude1')[0].placeholder='Input EF Scale Rating';
+            $(form).find(".button.button5").css("visibility", "visible");
             $(form).find(".fatal_div").css("visibility", "visible");
             $(form).find(".length_div").css("visibility", "visible");
             break;
@@ -89,6 +91,8 @@ function onSelectReportType(ele){
                     .attr("value", value)
                     .text(value));
             });
+            $(form).find(".button.button5").css("visibility", "hidden");
+            document.getElementsByName('magnitude1')[0].placeholder='Input Hail Diameter (inches)';
             $(form).find(".fatal_div").css("visibility", "visible");
             $(form).find(".length_div").css("visibility", "hidden");
             break;
@@ -125,10 +129,13 @@ function onSelectReportType(ele){
                     .attr("value", value)
                     .text(value));
             });
+            $(form).find(".button.button5").css("visibility", "hidden");
+            document.getElementsByName('magnitude1')[0].placeholder='Input Wind Speed (mph)';
             $(form).find(".fatal_div").css("visibility", "visible");
             $(form).find(".length_div").css("visibility", "hidden");
             break;
         default:
+            $(form).find(".button.button5").css("visibility", "hidden");
             $(form).find(".fatal_div").css("visibility", "hidden");
             $(form).find(".length_div").css("visibility", "hidden");
             return;
@@ -221,6 +228,9 @@ function dateSlider(){
         });
         $( "#month" ).val($( "#slider-range-month" ).slider( "values", 0 ) +
             "-" + $( "#slider-range-month" ).slider( "values", 1 ) );
+    } );
+    //loads popover on report event tab
+    $(document).ready(function () {$('#btnPopover').popover();
     } );
 }
 
