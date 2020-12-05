@@ -226,7 +226,7 @@ function mapInitialization(reports) {
             contentStr += '<p><b>' + 'Hail Size' + ':</b>&nbsp' + e['magnitude'] + '" ' +'</p>';
         }
         if (e['event_type'] == 'wind') {
-            contentStr += '<p><b>' + 'Wind Speed' + ':</b>' + e['magnitude'] + ' mph' +'</p>';
+            contentStr += '<p><b>' + 'Wind Speed' + ':</b>&nbsp' + e['magnitude'] + ' mph' +'</p>';
         }
 
         contentStr += '<p><b>' + 'Injuries' + ':</b>&nbsp' + e['injuries'] +
@@ -235,42 +235,48 @@ function mapInitialization(reports) {
             '</p>';
         contentStr += '<p><b>' + 'Fatalities' + ':</b>&nbsp' + e['fatalities'] +
                 '</p>';
+
         if (e['crop_loss'] == 0) {
             contentStr += '<p><b>' + 'Crop Loss' + ':</b> Unknown</p>';
         } else {
             contentStr += '<p><b>' + 'Crop Loss' + ':</b>&nbsp' + '$'+ e['crop_loss'] + ' million' +
                 '</p>';
         }
-        if (e['prop_loss'] == 1){
+
+        if (e['prop_loss'] == 1 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> < $50' + '</p>';
         }
-        if (e['prop_loss'] == 2){
+        if (e['prop_loss'] == 2 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> $50 - $500' + '</p>';
         }
-        if (e['prop_loss'] == 3){
+        if (e['prop_loss'] == 3 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> $500 - $5,000' + '</p>';
         }
-        if (e['prop_loss'] == 4){
+        if (e['prop_loss'] == 4 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> $5,000 - $50,000' + '</p>';
         }
-        if (e['prop_loss'] == 5){
+        if (e['prop_loss'] == 5 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> $50,000 - $500,000' + '</p>';
         }
-        if (e['prop_loss'] == 6){
+        if (e['prop_loss'] == 6 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> $500,000 - $5 million' + '</p>';
         }
-        if (e['prop_loss'] == 7){
+        if (e['prop_loss'] == 7 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> $5 million - $50 million' + '</p>';
         }
-        if (e['prop_loss'] == 8){
+        if (e['prop_loss'] == 8 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> $50 million - $500 million' + '</p>';
         }
-        if (e['prop_loss'] == 9){
+        if (e['prop_loss'] == 9 && e['year'] < 1996 ){
             contentStr += '<p><b>Property Loss:</b> > $500 million' + '</p>';
         }
-        if (e['prop_loss'] == 0) {
+        if (e['prop_loss'] == 0 && e['year'] > 1950 ) {
             contentStr += '<p><b>Property Loss:</b> Unknown' + '</p>';
         }
+        else {
+            contentStr += '<p><b>Property Loss:</b> $' + e['prop_loss'] + ' million' +'</p>';
+        }
+
         if (e['event_type'] == 'tornado') {
             contentStr += '<p><b>' + 'length' + ':</b>&nbsp' +
                 e['length'] + ' miles</p>';

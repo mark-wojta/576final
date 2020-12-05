@@ -89,9 +89,27 @@
 <%--              <select class="additional_msg_select" name="additional_message"></select>--%>
 <%--            </div>--%>
             <div class="form-group">
-              <label class="control-label col-sm-4">Magnitude: </label>
+              <label class="control-label col-sm-4">Magnitude:&nbsp</label>
+              <div class="col-sm-6" id="change1">
+                <input class="form-control" placeholder="Input EF Scale Rating" id="mag_select1" name="magnitude1">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="button button5" id="btnPopover" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Determining Tornado EF Scale Rating">
+                  <a class="hyperlink color" href="https://www.weather.gov/oun/efscale" target="_blank"><i class="glyphicon glyphicon-info-sign"></i></a>
+                </button>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="control-label col-sm-4" id="change2">Property Loss:&nbsp</label>
+              <div class="col-sm-8" id="change3">
+                <input class="form-control" placeholder="Estimated Dollar Value (millions)" name="prop_loss">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Crop Loss:&nbsp</label>
               <div class="col-sm-8">
-                <input class="form-control" placeholder="Magnitude Number" name="magnitude1">
+                <input class="form-control" placeholder="Estimated Dollar Value (millions)" name="crop_loss">
               </div>
             </div>
             <div class="form-group">
