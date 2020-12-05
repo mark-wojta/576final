@@ -62,26 +62,26 @@
             <hr>
             <h3 style="color:white;">Severe Event Details</h3>
             <div class="form-group">
-              <label class="control-label col-sm-3">Fatalities:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Fatalities:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="Number of Fatalities" name="fatalities">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Injuries:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Injuries:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="Number of injuries" name="injuries">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Date:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Date:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="YYYY-MM-DD" name="date">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Time:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Time:&nbsp</label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="HH:MM:SS" name="time">
               </div>
             </div>
@@ -89,14 +89,14 @@
 <%--              <select class="additional_msg_select" name="additional_message"></select>--%>
 <%--            </div>--%>
             <div class="form-group">
-              <label class="control-label col-sm-3">Magnitude:&nbsp</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Magnitude: </label>
+              <div class="col-sm-8">
                 <input class="form-control" placeholder="Magnitude Number" name="magnitude1">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Address:</label>
-              <div class="col-sm-9">
+              <label class="control-label col-sm-4">Address:</label>
+              <div class="col-sm-8">
                 <input class="form-control" id="autocomplete" placeholder="Address" >
               </div>
             </div>
