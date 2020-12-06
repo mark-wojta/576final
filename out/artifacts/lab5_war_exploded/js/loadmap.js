@@ -242,39 +242,41 @@ function mapInitialization(reports) {
             contentStr += '<p><b>' + 'Crop Loss' + ':</b>&nbsp' + '$'+ e['crop_loss'] + ' million' +
                 '</p>';
         }
-
-        if (e['prop_loss'] == 1 && e['year'] < 1996 ){
+        // formatting tornado property loss value in pop-up to account for two different methods of recording this value
+        // before and after 1996
+        if (e['event_type'] == 'tornado' && e['prop_loss'] == 1 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> < $50' + '</p>';
         }
-        if (e['prop_loss'] == 2 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 2 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> $50 - $500' + '</p>';
         }
-        if (e['prop_loss'] == 3 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 3 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> $500 - $5,000' + '</p>';
         }
-        if (e['prop_loss'] == 4 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 4 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> $5,000 - $50,000' + '</p>';
         }
-        if (e['prop_loss'] == 5 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 5 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> $50,000 - $500,000' + '</p>';
         }
-        if (e['prop_loss'] == 6 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 6 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> $500,000 - $5 million' + '</p>';
         }
-        if (e['prop_loss'] == 7 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 7 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> $5 million - $50 million' + '</p>';
         }
-        if (e['prop_loss'] == 8 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 8 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> $50 million - $500 million' + '</p>';
         }
-        if (e['prop_loss'] == 9 && e['year'] < 1996 ){
+        else if (e['event_type'] == 'tornado' && e['prop_loss'] == 9 && e['date'] < "1996-01-01" ) {
             contentStr += '<p><b>Property Loss:</b> > $500 million' + '</p>';
         }
-        if (e['prop_loss'] == 0 && e['year'] > 1950 ) {
+        //property loss value of 0 is always unknown for all storm types
+        else if (e['prop_loss'] == 0) {
             contentStr += '<p><b>Property Loss:</b> Unknown' + '</p>';
         }
-        else {
-            contentStr += '<p><b>Property Loss:</b> $' + e['prop_loss'] + ' million' +'</p>';
+        else { //property loss value listed in millions for tornadoes after 1995 and all instances of hail and wind
+            contentStr += '<p><b>Property Loss:</b> $' + e['prop_loss'] + ' million' + '</p>';
         }
 
         if (e['event_type'] == 'tornado') {

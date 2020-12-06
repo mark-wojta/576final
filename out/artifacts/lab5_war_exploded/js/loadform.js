@@ -53,7 +53,7 @@ function onSelectReportType(ele){
                     .attr("value", value)
                     .text(value));
             });
-            document.getElementsByName('magnitude1')[0].placeholder='Input EF Scale Rating';
+            document.getElementsByName('magnitude1')[0].placeholder='EF Scale Rating';
             $(form).find(".button.button5").css("visibility", "visible");
             $(form).find(".fatal_div").css("visibility", "visible");
             $(form).find(".length_div").css("visibility", "visible");
@@ -92,7 +92,7 @@ function onSelectReportType(ele){
                     .text(value));
             });
             $(form).find(".button.button5").css("visibility", "hidden");
-            document.getElementsByName('magnitude1')[0].placeholder='Input Hail Diameter (inches)';
+            document.getElementsByName('magnitude1')[0].placeholder='Hail Diameter(inches)';
             $(form).find(".fatal_div").css("visibility", "visible");
             $(form).find(".length_div").css("visibility", "hidden");
             break;
@@ -130,7 +130,7 @@ function onSelectReportType(ele){
                     .text(value));
             });
             $(form).find(".button.button5").css("visibility", "hidden");
-            document.getElementsByName('magnitude1')[0].placeholder='Input Wind Speed (mph)';
+            document.getElementsByName('magnitude1')[0].placeholder='Wind Speed (mph)';
             $(form).find(".fatal_div").css("visibility", "visible");
             $(form).find(".length_div").css("visibility", "hidden");
             break;
